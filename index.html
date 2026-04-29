@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -37,377 +36,376 @@
     pointer-events:none; z-index:0;
   }
 
-.app{
-position:relative; z-index:1;
-height:100vh; width:100vw;
-display:grid;
-grid-template-rows: 76px 110px 1fr 44px;
-overflow:hidden;
-}
+  .app{
+    position:relative; z-index:1;
+    height:100vh; width:100vw;
+    display:grid;
+    grid-template-rows: 76px 110px 1fr 44px;
+    overflow:hidden;
+  }
 
-.topbar{
-display:grid;
-grid-template-columns: auto 1fr auto;
-align-items:center;
-gap:48px;
-padding:0 40px;
-border-bottom:1px solid var(–line);
-background: linear-gradient(90deg, var(–bg2) 0%, var(–bg2) 60%, rgba(230,17,59,.08) 100%);
-}
-.brand{display:flex; align-items:center; gap:18px}
-.lp-mark{width:46px; height:46px}
-.lp-mark svg{width:100%; height:100%}
-.brand-text{
-font-family:var(–display);
-font-weight:700;
-font-size:22px;
-letter-spacing:.22em;
-}
-.brand-text .build{color:var(–lp)}
-.brand-divider{width:1px; height:36px; background:var(–line2)}
-.brand-sub{
-font-size:14px; color:var(–dim);
-letter-spacing:.28em;
-}
-.pill{
-display:inline-flex; align-items:center; gap:10px;
-color:var(–green);
-border:1px solid var(–green);
-padding:8px 20px;
-font-size:14px;
-letter-spacing:.25em;
-font-weight:500;
-font-family:var(–display);
-}
-.pill::before{
-content:’’; width:9px; height:9px; border-radius:50%;
-background:var(–green);
-box-shadow:0 0 14px var(–green);
-animation:pulse 2s infinite;
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.clock{
-font-size:14px; color:var(–dim);
-letter-spacing:.18em;
-display:flex; align-items:center; gap:18px;
-}
-.clock b{color:var(–text); font-weight:500; font-size:18px}
+  .topbar{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap:48px;
+    padding:0 40px;
+    border-bottom:1px solid var(--line);
+    background: linear-gradient(90deg, var(--bg2) 0%, var(--bg2) 60%, rgba(230,17,59,.08) 100%);
+  }
+  .brand{display:flex; align-items:center; gap:18px}
+  .lp-mark{width:46px; height:46px}
+  .lp-mark svg{width:100%; height:100%}
+  .brand-text{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:.22em;
+  }
+  .brand-text .build{color:var(--lp)}
+  .brand-divider{width:1px; height:36px; background:var(--line2)}
+  .brand-sub{
+    font-size:14px; color:var(--dim);
+    letter-spacing:.28em;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--green);
+    border:1px solid var(--green);
+    padding:8px 20px;
+    font-size:14px;
+    letter-spacing:.25em;
+    font-weight:500;
+    font-family:var(--display);
+  }
+  .pill::before{
+    content:''; width:9px; height:9px; border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 14px var(--green);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .clock{
+    font-size:14px; color:var(--dim);
+    letter-spacing:.18em;
+    display:flex; align-items:center; gap:18px;
+  }
+  .clock b{color:var(--text); font-weight:500; font-size:18px}
 
-.kpi-bar{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-border-bottom:1px solid var(–line);
-background:var(–bg2);
-}
-.kpi{
-padding:18px 24px;
-border-right:1px solid var(–line);
-display:flex; flex-direction:column;
-justify-content:center;
-gap:6px;
-position:relative;
-overflow:hidden;
-}
-.kpi:last-child{border-right:none}
-.kpi .lbl{font-size:12px; color:var(–dim); letter-spacing:.22em}
-.kpi .val{
-font-family:var(–display);
-font-size:32px; font-weight:700; line-height:1;
-display:flex; align-items:baseline; gap:8px;
-}
-.kpi .val .unit{font-family:var(–mono); font-size:14px; color:var(–dim); font-weight:400}
-.kpi .delta{font-size:12px; letter-spacing:.12em}
-.kpi .delta.up{color:var(–green)}
-.kpi .delta.down{color:var(–red)}
-.kpi .delta.flat{color:var(–dim)}
-.kpi.accent::before{
-content:’’; position:absolute;
-top:0; left:0; width:4px; height:100%;
-background:var(–lp);
-}
+  .kpi-bar{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+  }
+  .kpi{
+    padding:18px 24px;
+    border-right:1px solid var(--line);
+    display:flex; flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kpi:last-child{border-right:none}
+  .kpi .lbl{font-size:12px; color:var(--dim); letter-spacing:.22em}
+  .kpi .val{
+    font-family:var(--display);
+    font-size:32px; font-weight:700; line-height:1;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .kpi .val .unit{font-family:var(--mono); font-size:14px; color:var(--dim); font-weight:400}
+  .kpi .delta{font-size:12px; letter-spacing:.12em}
+  .kpi .delta.up{color:var(--green)}
+  .kpi .delta.down{color:var(--red)}
+  .kpi .delta.flat{color:var(--dim)}
+  .kpi.accent::before{
+    content:''; position:absolute;
+    top:0; left:0; width:4px; height:100%;
+    background:var(--lp);
+  }
 
-.main{
-display:grid;
-grid-template-columns:1.55fr 1fr;
-overflow:hidden;
-min-height:0;
-}
+  .main{
+    display:grid;
+    grid-template-columns:1.55fr 1fr;
+    overflow:hidden;
+    min-height:0;
+  }
 
-.left{
-display:flex; flex-direction:column;
-border-right:1px solid var(–line);
-overflow:hidden; min-height:0;
-}
-.ph{
-padding:24px 40px 22px;
-border-bottom:1px solid var(–line);
-background:var(–bg2);
-display:grid;
-grid-template-columns:1fr auto;
-gap:28px;
-align-items:end;
-flex-shrink:0;
-}
-.ph .meta{font-size:13px; color:var(–dim); letter-spacing:.28em; margin-bottom:10px}
-.ph .meta b{color:var(–lp); font-weight:500}
-.ph h1{
-font-family:var(–display);
-font-size:34px; font-weight:700;
-letter-spacing:-.02em; line-height:1.1;
-}
-.ph h1 .a{color:var(–lp)}
-.ph .dates{
-text-align:right;
-font-size:12px; color:var(–dim);
-letter-spacing:.22em; line-height:1.9;
-}
-.ph .dates b{
-display:block; color:var(–text);
-font-family:var(–mono); font-size:16px;
-letter-spacing:0; font-weight:500; margin-top:2px;
-}
+  .left{
+    display:flex; flex-direction:column;
+    border-right:1px solid var(--line);
+    overflow:hidden; min-height:0;
+  }
+  .ph{
+    padding:24px 40px 22px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:28px;
+    align-items:end;
+    flex-shrink:0;
+  }
+  .ph .meta{font-size:13px; color:var(--dim); letter-spacing:.28em; margin-bottom:10px}
+  .ph .meta b{color:var(--lp); font-weight:500}
+  .ph h1{
+    font-family:var(--display);
+    font-size:34px; font-weight:700;
+    letter-spacing:-.02em; line-height:1.1;
+  }
+  .ph h1 .a{color:var(--lp)}
+  .ph .dates{
+    text-align:right;
+    font-size:12px; color:var(--dim);
+    letter-spacing:.22em; line-height:1.9;
+  }
+  .ph .dates b{
+    display:block; color:var(--text);
+    font-family:var(--mono); font-size:16px;
+    letter-spacing:0; font-weight:500; margin-top:2px;
+  }
 
-/* HERO — guaranteed visible area whether image loads or not */
-.hero{
-flex:1 1 auto;
-background:var(–bg3);
-position:relative;
-overflow:hidden;
-min-height:280px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-bottom:1px solid var(–line);
-}
-.hero img{
-max-width:78%;
-max-height:88%;
-object-fit:contain;
-filter:drop-shadow(0 24px 48px rgba(0,0,0,.7));
-}
-/* Visible fallback if image fails to load */
-.hero img:not([src]),
-.hero img[src=””],
-.hero::after{
-/* fallback content shows when image is empty/broken */
-}
-.hero-fallback{
-position:absolute;
-inset:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:14px;
-color:var(–dim);
-font-size:13px;
-letter-spacing:.25em;
-pointer-events:none;
-z-index:0;
-}
-.hero-fallback .box{
-width:200px; height:140px;
-border:2px dashed var(–line2);
-display:flex;
-align-items:center;
-justify-content:center;
-color:var(–faint);
-font-family:var(–display);
-font-weight:600;
-font-size:11px;
-letter-spacing:.3em;
-}
-.hero img{position:relative; z-index:1}
-.hero::before{
-content:’’; position:absolute;
-top:18px; left:18px; width:22px; height:22px;
-border-top:2px solid var(–lp);
-border-left:2px solid var(–lp);
-z-index:2;
-}
-.corner-br{
-content:’’; position:absolute;
-bottom:18px; right:18px; width:22px; height:22px;
-border-bottom:2px solid var(–lp);
-border-right:2px solid var(–lp);
-z-index:2;
-}
-.htag{
-position:absolute; bottom:20px; left:20px;
-font-size:11px; color:var(–dim);
-letter-spacing:.28em;
-background:rgba(10,10,11,.75);
-padding:6px 14px;
-border-left:2px solid var(–lp);
-z-index:2;
-}
+  /* HERO — guaranteed visible area whether image loads or not */
+  .hero{
+    flex:1 1 auto;
+    background:var(--bg3);
+    position:relative;
+    overflow:hidden;
+    min-height:280px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .hero img{
+    max-width:78%;
+    max-height:88%;
+    object-fit:contain;
+    filter:drop-shadow(0 24px 48px rgba(0,0,0,.7));
+  }
+  /* Visible fallback if image fails to load */
+  .hero img:not([src]),
+  .hero img[src=""],
+  .hero::after{
+    /* fallback content shows when image is empty/broken */
+  }
+  .hero-fallback{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    color:var(--dim);
+    font-size:13px;
+    letter-spacing:.25em;
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero-fallback .box{
+    width:200px; height:140px;
+    border:2px dashed var(--line2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--faint);
+    font-family:var(--display);
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.3em;
+  }
+  .hero img{position:relative; z-index:1}
+  .hero::before{
+    content:''; position:absolute;
+    top:18px; left:18px; width:22px; height:22px;
+    border-top:2px solid var(--lp);
+    border-left:2px solid var(--lp);
+    z-index:2;
+  }
+  .corner-br{
+    content:''; position:absolute;
+    bottom:18px; right:18px; width:22px; height:22px;
+    border-bottom:2px solid var(--lp);
+    border-right:2px solid var(--lp);
+    z-index:2;
+  }
+  .htag{
+    position:absolute; bottom:20px; left:20px;
+    font-size:11px; color:var(--dim);
+    letter-spacing:.28em;
+    background:rgba(10,10,11,.75);
+    padding:6px 14px;
+    border-left:2px solid var(--lp);
+    z-index:2;
+  }
 
-.desc{
-padding:22px 40px 18px;
-background:var(–bg2);
-border-bottom:1px solid var(–line);
-flex-shrink:0;
-}
-.desc h4{
-font-size:12px; color:var(–dim);
-letter-spacing:.28em; margin-bottom:12px;
-display:flex; align-items:center; gap:10px;
-}
-.desc h4::after{content:’’; flex:1; height:1px; background:var(–line)}
-.desc p{font-size:15px; line-height:1.6; margin-bottom:8px}
-.desc p+p{color:var(–dim); margin-bottom:0}
-.specs{
-display:flex; gap:32px;
-margin-top:14px; padding-top:12px;
-border-top:1px solid var(–line);
-font-size:12px; letter-spacing:.18em; color:var(–dim);
-}
-.specs b{
-color:var(–text); font-family:var(–mono);
-font-weight:500; margin-left:8px;
-letter-spacing:0; font-size:14px;
-}
+  .desc{
+    padding:22px 40px 18px;
+    background:var(--bg2);
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .desc h4{
+    font-size:12px; color:var(--dim);
+    letter-spacing:.28em; margin-bottom:12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .desc h4::after{content:''; flex:1; height:1px; background:var(--line)}
+  .desc p{font-size:15px; line-height:1.6; margin-bottom:8px}
+  .desc p+p{color:var(--dim); margin-bottom:0}
+  .specs{
+    display:flex; gap:32px;
+    margin-top:14px; padding-top:12px;
+    border-top:1px solid var(--line);
+    font-size:12px; letter-spacing:.18em; color:var(--dim);
+  }
+  .specs b{
+    color:var(--text); font-family:var(--mono);
+    font-weight:500; margin-left:8px;
+    letter-spacing:0; font-size:14px;
+  }
 
-.bars{padding:24px 40px 28px; background:var(–bg2); flex-shrink:0}
-.bars h4{
-font-size:13px; color:var(–text);
-letter-spacing:.3em; font-weight:500;
-margin-bottom:18px;
-display:flex; align-items:center; gap:12px;
-}
-.bars h4::before{content:’’; width:4px; height:18px; background:var(–lp)}
-.bars h4::after{content:’’; flex:1; height:1px; background:var(–line)}
-.bg{display:grid; grid-template-columns:repeat(2,1fr); gap:16px 36px}
-.bi{display:flex; flex-direction:column; gap:8px}
-.bh{
-display:flex; justify-content:space-between;
-align-items:baseline; font-size:14px;
-}
-.bh .l{color:var(–text); font-weight:500}
-.bh .p{font-family:var(–mono); color:var(–dim); font-size:14px}
-.bh .p b{color:var(–text); font-weight:500; font-size:16px}
-.bt{
-height:10px; background:var(–bg3);
-border:1px solid var(–line);
-position:relative; overflow:hidden;
-}
-.bf{
-position:absolute; top:0; left:0; bottom:0;
-background:var(–lp);
-box-shadow:0 0 16px rgba(230,17,59,.5);
-}
-.bf.green{background:var(–green); box-shadow:0 0 16px rgba(0,217,126,.45)}
-.bf.amber{background:var(–amber); box-shadow:0 0 16px rgba(255,176,0,.45)}
-.bf.red{background:var(–red); box-shadow:0 0 16px rgba(255,59,59,.45)}
+  .bars{padding:24px 40px 28px; background:var(--bg2); flex-shrink:0}
+  .bars h4{
+    font-size:13px; color:var(--text);
+    letter-spacing:.3em; font-weight:500;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .bars h4::before{content:''; width:4px; height:18px; background:var(--lp)}
+  .bars h4::after{content:''; flex:1; height:1px; background:var(--line)}
+  .bg{display:grid; grid-template-columns:repeat(2,1fr); gap:16px 36px}
+  .bi{display:flex; flex-direction:column; gap:8px}
+  .bh{
+    display:flex; justify-content:space-between;
+    align-items:baseline; font-size:14px;
+  }
+  .bh .l{color:var(--text); font-weight:500}
+  .bh .p{font-family:var(--mono); color:var(--dim); font-size:14px}
+  .bh .p b{color:var(--text); font-weight:500; font-size:16px}
+  .bt{
+    height:10px; background:var(--bg3);
+    border:1px solid var(--line);
+    position:relative; overflow:hidden;
+  }
+  .bf{
+    position:absolute; top:0; left:0; bottom:0;
+    background:var(--lp);
+    box-shadow:0 0 16px rgba(230,17,59,.5);
+  }
+  .bf.green{background:var(--green); box-shadow:0 0 16px rgba(0,217,126,.45)}
+  .bf.amber{background:var(--amber); box-shadow:0 0 16px rgba(255,176,0,.45)}
+  .bf.red{background:var(--red); box-shadow:0 0 16px rgba(255,59,59,.45)}
 
-.right{
-background:var(–bg2);
-display:flex; flex-direction:column;
-overflow:hidden; min-height:0;
-}
-.rh{
-padding:24px 36px 20px;
-border-bottom:1px solid var(–line);
-flex-shrink:0;
-}
-.rh .k{font-size:13px; color:var(–lp); letter-spacing:.32em; margin-bottom:8px}
-.rh h2{font-family:var(–display); font-size:30px; font-weight:700; line-height:1.1}
-.rh .s{font-size:14px; color:var(–dim); margin-top:8px}
+  .right{
+    background:var(--bg2);
+    display:flex; flex-direction:column;
+    overflow:hidden; min-height:0;
+  }
+  .rh{
+    padding:24px 36px 20px;
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .rh .k{font-size:13px; color:var(--lp); letter-spacing:.32em; margin-bottom:8px}
+  .rh h2{font-family:var(--display); font-size:30px; font-weight:700; line-height:1.1}
+  .rh .s{font-size:14px; color:var(--dim); margin-top:8px}
 
-.ts{
-display:grid; grid-template-columns:repeat(3,1fr);
-border-bottom:1px solid var(–line);
-flex-shrink:0;
-}
-.tc{padding:18px 16px; border-right:1px solid var(–line); text-align:center}
-.tc:last-child{border-right:none}
-.tc .n{font-family:var(–display); font-size:34px; font-weight:700; line-height:1}
-.tc .n.amber{color:var(–amber)}
-.tc .n.red{color:var(–red)}
-.tc .n.green{color:var(–green)}
-.tc .l{font-size:11px; color:var(–dim); letter-spacing:.25em; margin-top:8px}
+  .ts{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .tc{padding:18px 16px; border-right:1px solid var(--line); text-align:center}
+  .tc:last-child{border-right:none}
+  .tc .n{font-family:var(--display); font-size:34px; font-weight:700; line-height:1}
+  .tc .n.amber{color:var(--amber)}
+  .tc .n.red{color:var(--red)}
+  .tc .n.green{color:var(--green)}
+  .tc .l{font-size:11px; color:var(--dim); letter-spacing:.25em; margin-top:8px}
 
-.tl-wrap{
-flex:1 1 auto;
-overflow:hidden;
-min-height:0;
-position:relative;
-padding:18px 28px;
-}
-.tl-wrap::before, .tl-wrap::after{
-content:’’; position:absolute;
-left:0; right:0; height:50px;
-pointer-events:none; z-index:2;
-}
-.tl-wrap::before{top:0; background:linear-gradient(to bottom, var(–bg2), transparent)}
-.tl-wrap::after{bottom:0; background:linear-gradient(to top, var(–bg2), transparent)}
-.tl{
-display:flex; flex-direction:column; gap:12px;
-animation: scroll 60s linear infinite;
-}
-@keyframes scroll {
-0%   { transform: translateY(0); }
-100% { transform: translateY(-50%); }
-}
-.tl-wrap:hover .tl{animation-play-state:paused}
+  .tl-wrap{
+    flex:1 1 auto;
+    overflow:hidden;
+    min-height:0;
+    position:relative;
+    padding:18px 28px;
+  }
+  .tl-wrap::before, .tl-wrap::after{
+    content:''; position:absolute;
+    left:0; right:0; height:50px;
+    pointer-events:none; z-index:2;
+  }
+  .tl-wrap::before{top:0; background:linear-gradient(to bottom, var(--bg2), transparent)}
+  .tl-wrap::after{bottom:0; background:linear-gradient(to top, var(--bg2), transparent)}
+  .tl{
+    display:flex; flex-direction:column; gap:12px;
+    animation: scroll 60s linear infinite;
+  }
+  @keyframes scroll {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  .tl-wrap:hover .tl{animation-play-state:paused}
 
-.ti{
-display:grid;
-grid-template-columns:auto 1fr auto;
-gap:16px; padding:14px 18px;
-background:var(–bg3);
-border:1px solid var(–line);
-border-left:4px solid var(–lp);
-align-items:start;
-flex-shrink:0;
-}
-.ti.warn{border-left-color:var(–amber)}
-.ti.crit{border-left-color:var(–red)}
-.ti.done{border-left-color:var(–green); opacity:.55}
-.cb{
-width:18px; height:18px;
-border:1.5px solid var(–faint);
-margin-top:3px;
-display:flex; align-items:center; justify-content:center;
-flex-shrink:0;
-}
-.ti.done .cb{background:var(–green); border-color:var(–green)}
-.ti.done .cb::after{
-content:’’; width:9px; height:5px;
-border-left:2px solid black;
-border-bottom:2px solid black;
-transform:rotate(-45deg) translate(1px,-1px);
-}
-.tn{font-size:15px; font-weight:500; line-height:1.3}
-.ti.done .tn{text-decoration:line-through; color:var(–dim)}
-.tm{font-size:12px; color:var(–dim); margin-top:4px; line-height:1.5}
-.te{
-font-family:var(–mono); font-size:11px; color:var(–dim);
-border:1px solid var(–line2);
-padding:5px 10px; letter-spacing:.12em;
-flex-shrink:0; align-self:start;
-margin-top:2px; white-space:nowrap;
-}
-.te.warn{color:var(–amber); border-color:var(–amber)}
-.te.crit{color:var(–red); border-color:var(–red)}
-.te.done{color:var(–green); border-color:var(–green)}
+  .ti{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:16px; padding:14px 18px;
+    background:var(--bg3);
+    border:1px solid var(--line);
+    border-left:4px solid var(--lp);
+    align-items:start;
+    flex-shrink:0;
+  }
+  .ti.warn{border-left-color:var(--amber)}
+  .ti.crit{border-left-color:var(--red)}
+  .ti.done{border-left-color:var(--green); opacity:.55}
+  .cb{
+    width:18px; height:18px;
+    border:1.5px solid var(--faint);
+    margin-top:3px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .ti.done .cb{background:var(--green); border-color:var(--green)}
+  .ti.done .cb::after{
+    content:''; width:9px; height:5px;
+    border-left:2px solid black;
+    border-bottom:2px solid black;
+    transform:rotate(-45deg) translate(1px,-1px);
+  }
+  .tn{font-size:15px; font-weight:500; line-height:1.3}
+  .ti.done .tn{text-decoration:line-through; color:var(--dim)}
+  .tm{font-size:12px; color:var(--dim); margin-top:4px; line-height:1.5}
+  .te{
+    font-family:var(--mono); font-size:11px; color:var(--dim);
+    border:1px solid var(--line2);
+    padding:5px 10px; letter-spacing:.12em;
+    flex-shrink:0; align-self:start;
+    margin-top:2px; white-space:nowrap;
+  }
+  .te.warn{color:var(--amber); border-color:var(--amber)}
+  .te.crit{color:var(--red); border-color:var(--red)}
+  .te.done{color:var(--green); border-color:var(--green)}
 
-.footer{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 40px;
-color:var(–faint);
-font-size:11px;
-letter-spacing:.28em;
-border-top:1px solid var(–line);
-background:var(–bg2);
-}
-.footer .lpm{display:flex; align-items:center; gap:10px}
-.footer .lpm svg{width:18px; height:18px}
-.footer span b{color:var(–lp); font-weight:500}
+  .footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    color:var(--faint);
+    font-size:11px;
+    letter-spacing:.28em;
+    border-top:1px solid var(--line);
+    background:var(--bg2);
+  }
+  .footer .lpm{display:flex; align-items:center; gap:10px}
+  .footer .lpm svg{width:18px; height:18px}
+  .footer span b{color:var(--lp); font-weight:500}
 </style>
-
 </head>
 <body>
 <div class="app">
@@ -447,89 +445,86 @@ background:var(–bg2);
         </div>
       </div>
 
-```
-  <div class="hero">
-    <div class="hero-fallback">
-      <div class="box">IMAGE NOT LOADED</div>
-      <div>image.jpg expected at site root</div>
+      <div class="hero">
+        <div class="hero-fallback">
+          <div class="box">IMAGE NOT LOADED</div>
+          <div>image.jpg expected at site root</div>
+        </div>
+        <img src="image.jpg" alt="CF Handling System">
+        <span class="corner-br"></span>
+        <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
+      </div>
+
+      <div class="desc">
+        <h4>PROJECT DESCRIPTION</h4>
+        <p>Sheet pick-and-place system for carbon-fiber prepreg layup. Custom 4-zone pneumatic gripper picks up-sheets and down-sheets from sliding presentation drawers, rotates each to the correct orientation, and stacks them into a travelling tray on a conveyor &mdash; building a multi-layer recipe automatically.</p>
+        <p>Built on Digitool, with vision-based size confirmation, stepper-controlled rotation, and recipe-driven sequencing. Single gripper handles both sheet types, with sheet sizes from 2&Prime; to 12&Prime;.</p>
+        <div class="specs">
+          <div>SHEET RANGE<b>2&Prime; &mdash; 12&Prime;</b></div>
+          <div>GRIPPER ZONES<b>4 + center</b></div>
+          <div>PLATFORM<b>Digitool</b></div>
+          <div>SYSTEM COST<b>$60,500</b></div>
+        </div>
+      </div>
+
+      <div class="bars">
+        <h4>PROGRAMME STATUS</h4>
+        <div class="bg">
+          <div class="bi"><div class="bh"><span class="l">Mechanical Design</span><span class="p"><b>92</b>%</span></div><div class="bt"><div class="bf green" style="width:92%"></div></div></div>
+          <div class="bi"><div class="bh"><span class="l">Gripper Build</span><span class="p"><b>65</b>%</span></div><div class="bt"><div class="bf green" style="width:65%"></div></div></div>
+          <div class="bi"><div class="bh"><span class="l">Conveyor &amp; Drawers</span><span class="p"><b>40</b>%</span></div><div class="bt"><div class="bf amber" style="width:40%"></div></div></div>
+          <div class="bi"><div class="bh"><span class="l">Vision System</span><span class="p"><b>15</b>%</span></div><div class="bt"><div class="bf amber" style="width:15%"></div></div></div>
+          <div class="bi"><div class="bh"><span class="l">GUI &amp; Recipe Engine</span><span class="p"><b>10</b>%</span></div><div class="bt"><div class="bf red" style="width:10%"></div></div></div>
+          <div class="bi"><div class="bh"><span class="l">Budget Burn</span><span class="p"><b>$28K</b> / $60.5K</span></div><div class="bt"><div class="bf" style="width:46%"></div></div></div>
+        </div>
+      </div>
     </div>
-    <img src="image.jpg" alt="CF Handling System">
-    <span class="corner-br"></span>
-    <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
-  </div>
 
-  <div class="desc">
-    <h4>PROJECT DESCRIPTION</h4>
-    <p>Sheet pick-and-place system for carbon-fiber prepreg layup. Custom 4-zone pneumatic gripper picks up-sheets and down-sheets from sliding presentation drawers, rotates each to the correct orientation, and stacks them into a travelling tray on a conveyor &mdash; building a multi-layer recipe automatically.</p>
-    <p>Built on Digitool, with vision-based size confirmation, stepper-controlled rotation, and recipe-driven sequencing. Single gripper handles both sheet types, with sheet sizes from 2&Prime; to 12&Prime;.</p>
-    <div class="specs">
-      <div>SHEET RANGE<b>2&Prime; &mdash; 12&Prime;</b></div>
-      <div>GRIPPER ZONES<b>4 + center</b></div>
-      <div>PLATFORM<b>Digitool</b></div>
-      <div>SYSTEM COST<b>$60,500</b></div>
+    <div class="right">
+      <div class="rh">
+        <div class="k">PROJECT-SPECIFIC</div>
+        <h2>Left to Do</h2>
+        <div class="s">Outstanding work to bring the system to full operating state.</div>
+      </div>
+      <div class="ts">
+        <div class="tc"><div class="n green">3</div><div class="l">DONE</div></div>
+        <div class="tc"><div class="n amber">7</div><div class="l">IN FLIGHT</div></div>
+        <div class="tc"><div class="n red">4</div><div class="l">NOT STARTED</div></div>
+      </div>
+      <div class="tl-wrap">
+        <div class="tl">
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Gripper concept &amp; CoDR</div><div class="tm">4-zone pneumatic + center cup, aluminium plate, stepper rotation</div></div><div class="te done">DONE</div></div>
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Cost model &amp; BoM</div><div class="tm">~$2K gripper &middot; ~$3.8K conveyors &middot; $60.5K total</div></div><div class="te done">DONE</div></div>
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Mechanical layout</div><div class="tm">Digitool + internal/external conveyor architecture locked</div></div><div class="te done">DONE</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Procure &amp; assemble gripper parts</div><div class="tm">Plate, suction cups, stepper, encoder, driver, home sensor</div></div><div class="te">1&ndash;2 WK</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Gripper testing on real samples</div><div class="tm">Suction strength validation &mdash; samples required from LM</div></div><div class="te warn">1&ndash;2 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Sheet presentation drawers</div><div class="tm">Sliding tray mechanism for up- and down-sheets</div></div><div class="te">2 DAYS</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Procure &amp; assemble conveyors</div><div class="tm">Internal + external conveyor units &middot; long lead time</div></div><div class="te warn">2 WK</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Vision integration</div><div class="tm">Camera + 2 weeks contractor support &middot; sheet size confirmation</div></div><div class="te warn">3 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">GUI &amp; recipe generation</div><div class="tm">Operator UI, layer-count recipes, sequence orchestration</div></div><div class="te">2 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Travelling &amp; transfer trays</div><div class="tm">Custom tray geometry for stack hand-off</div></div><div class="te">1 WK</div></div>
+          <div class="ti crit"><div class="cb"></div><div><div class="tn">Resolve gripper-vs-tray clearance</div><div class="tm">11.75&Prime; gripper plate may not fit smaller trays</div></div><div class="te crit">OPEN</div></div>
+          <div class="ti crit"><div class="cb"></div><div><div class="tn">Cycle-time validation</div><div class="tm">Single gripper for both sheet types &middot; throughput risk</div></div><div class="te crit">OPEN</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">T&Uuml;V inspection &amp; safety review</div><div class="tm">$5K budget allocated &middot; scheduled pre-shipping</div></div><div class="te">1 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Full system integration test</div><div class="tm">End-to-end run-up at Launchpad before LM ship</div></div><div class="te">1 WK</div></div>
+
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Gripper concept &amp; CoDR</div><div class="tm">4-zone pneumatic + center cup, aluminium plate, stepper rotation</div></div><div class="te done">DONE</div></div>
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Cost model &amp; BoM</div><div class="tm">~$2K gripper &middot; ~$3.8K conveyors &middot; $60.5K total</div></div><div class="te done">DONE</div></div>
+          <div class="ti done"><div class="cb"></div><div><div class="tn">Mechanical layout</div><div class="tm">Digitool + internal/external conveyor architecture locked</div></div><div class="te done">DONE</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Procure &amp; assemble gripper parts</div><div class="tm">Plate, suction cups, stepper, encoder, driver, home sensor</div></div><div class="te">1&ndash;2 WK</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Gripper testing on real samples</div><div class="tm">Suction strength validation &mdash; samples required from LM</div></div><div class="te warn">1&ndash;2 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Sheet presentation drawers</div><div class="tm">Sliding tray mechanism for up- and down-sheets</div></div><div class="te">2 DAYS</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Procure &amp; assemble conveyors</div><div class="tm">Internal + external conveyor units &middot; long lead time</div></div><div class="te warn">2 WK</div></div>
+          <div class="ti warn"><div class="cb"></div><div><div class="tn">Vision integration</div><div class="tm">Camera + 2 weeks contractor support &middot; sheet size confirmation</div></div><div class="te warn">3 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">GUI &amp; recipe generation</div><div class="tm">Operator UI, layer-count recipes, sequence orchestration</div></div><div class="te">2 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Travelling &amp; transfer trays</div><div class="tm">Custom tray geometry for stack hand-off</div></div><div class="te">1 WK</div></div>
+          <div class="ti crit"><div class="cb"></div><div><div class="tn">Resolve gripper-vs-tray clearance</div><div class="tm">11.75&Prime; gripper plate may not fit smaller trays</div></div><div class="te crit">OPEN</div></div>
+          <div class="ti crit"><div class="cb"></div><div><div class="tn">Cycle-time validation</div><div class="tm">Single gripper for both sheet types &middot; throughput risk</div></div><div class="te crit">OPEN</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">T&Uuml;V inspection &amp; safety review</div><div class="tm">$5K budget allocated &middot; scheduled pre-shipping</div></div><div class="te">1 WK</div></div>
+          <div class="ti"><div class="cb"></div><div><div class="tn">Full system integration test</div><div class="tm">End-to-end run-up at Launchpad before LM ship</div></div><div class="te">1 WK</div></div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="bars">
-    <h4>PROGRAMME STATUS</h4>
-    <div class="bg">
-      <div class="bi"><div class="bh"><span class="l">Mechanical Design</span><span class="p"><b>92</b>%</span></div><div class="bt"><div class="bf green" style="width:92%"></div></div></div>
-      <div class="bi"><div class="bh"><span class="l">Gripper Build</span><span class="p"><b>65</b>%</span></div><div class="bt"><div class="bf green" style="width:65%"></div></div></div>
-      <div class="bi"><div class="bh"><span class="l">Conveyor &amp; Drawers</span><span class="p"><b>40</b>%</span></div><div class="bt"><div class="bf amber" style="width:40%"></div></div></div>
-      <div class="bi"><div class="bh"><span class="l">Vision System</span><span class="p"><b>15</b>%</span></div><div class="bt"><div class="bf amber" style="width:15%"></div></div></div>
-      <div class="bi"><div class="bh"><span class="l">GUI &amp; Recipe Engine</span><span class="p"><b>10</b>%</span></div><div class="bt"><div class="bf red" style="width:10%"></div></div></div>
-      <div class="bi"><div class="bh"><span class="l">Budget Burn</span><span class="p"><b>$28K</b> / $60.5K</span></div><div class="bt"><div class="bf" style="width:46%"></div></div></div>
-    </div>
-  </div>
-</div>
-
-<div class="right">
-  <div class="rh">
-    <div class="k">PROJECT-SPECIFIC</div>
-    <h2>Left to Do</h2>
-    <div class="s">Outstanding work to bring the system to full operating state.</div>
-  </div>
-  <div class="ts">
-    <div class="tc"><div class="n green">3</div><div class="l">DONE</div></div>
-    <div class="tc"><div class="n amber">7</div><div class="l">IN FLIGHT</div></div>
-    <div class="tc"><div class="n red">4</div><div class="l">NOT STARTED</div></div>
-  </div>
-  <div class="tl-wrap">
-    <div class="tl">
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Gripper concept &amp; CoDR</div><div class="tm">4-zone pneumatic + center cup, aluminium plate, stepper rotation</div></div><div class="te done">DONE</div></div>
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Cost model &amp; BoM</div><div class="tm">~$2K gripper &middot; ~$3.8K conveyors &middot; $60.5K total</div></div><div class="te done">DONE</div></div>
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Mechanical layout</div><div class="tm">Digitool + internal/external conveyor architecture locked</div></div><div class="te done">DONE</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Procure &amp; assemble gripper parts</div><div class="tm">Plate, suction cups, stepper, encoder, driver, home sensor</div></div><div class="te">1&ndash;2 WK</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Gripper testing on real samples</div><div class="tm">Suction strength validation &mdash; samples required from LM</div></div><div class="te warn">1&ndash;2 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Sheet presentation drawers</div><div class="tm">Sliding tray mechanism for up- and down-sheets</div></div><div class="te">2 DAYS</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Procure &amp; assemble conveyors</div><div class="tm">Internal + external conveyor units &middot; long lead time</div></div><div class="te warn">2 WK</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Vision integration</div><div class="tm">Camera + 2 weeks contractor support &middot; sheet size confirmation</div></div><div class="te warn">3 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">GUI &amp; recipe generation</div><div class="tm">Operator UI, layer-count recipes, sequence orchestration</div></div><div class="te">2 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Travelling &amp; transfer trays</div><div class="tm">Custom tray geometry for stack hand-off</div></div><div class="te">1 WK</div></div>
-      <div class="ti crit"><div class="cb"></div><div><div class="tn">Resolve gripper-vs-tray clearance</div><div class="tm">11.75&Prime; gripper plate may not fit smaller trays</div></div><div class="te crit">OPEN</div></div>
-      <div class="ti crit"><div class="cb"></div><div><div class="tn">Cycle-time validation</div><div class="tm">Single gripper for both sheet types &middot; throughput risk</div></div><div class="te crit">OPEN</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">T&Uuml;V inspection &amp; safety review</div><div class="tm">$5K budget allocated &middot; scheduled pre-shipping</div></div><div class="te">1 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Full system integration test</div><div class="tm">End-to-end run-up at Launchpad before LM ship</div></div><div class="te">1 WK</div></div>
-
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Gripper concept &amp; CoDR</div><div class="tm">4-zone pneumatic + center cup, aluminium plate, stepper rotation</div></div><div class="te done">DONE</div></div>
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Cost model &amp; BoM</div><div class="tm">~$2K gripper &middot; ~$3.8K conveyors &middot; $60.5K total</div></div><div class="te done">DONE</div></div>
-      <div class="ti done"><div class="cb"></div><div><div class="tn">Mechanical layout</div><div class="tm">Digitool + internal/external conveyor architecture locked</div></div><div class="te done">DONE</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Procure &amp; assemble gripper parts</div><div class="tm">Plate, suction cups, stepper, encoder, driver, home sensor</div></div><div class="te">1&ndash;2 WK</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Gripper testing on real samples</div><div class="tm">Suction strength validation &mdash; samples required from LM</div></div><div class="te warn">1&ndash;2 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Sheet presentation drawers</div><div class="tm">Sliding tray mechanism for up- and down-sheets</div></div><div class="te">2 DAYS</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Procure &amp; assemble conveyors</div><div class="tm">Internal + external conveyor units &middot; long lead time</div></div><div class="te warn">2 WK</div></div>
-      <div class="ti warn"><div class="cb"></div><div><div class="tn">Vision integration</div><div class="tm">Camera + 2 weeks contractor support &middot; sheet size confirmation</div></div><div class="te warn">3 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">GUI &amp; recipe generation</div><div class="tm">Operator UI, layer-count recipes, sequence orchestration</div></div><div class="te">2 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Travelling &amp; transfer trays</div><div class="tm">Custom tray geometry for stack hand-off</div></div><div class="te">1 WK</div></div>
-      <div class="ti crit"><div class="cb"></div><div><div class="tn">Resolve gripper-vs-tray clearance</div><div class="tm">11.75&Prime; gripper plate may not fit smaller trays</div></div><div class="te crit">OPEN</div></div>
-      <div class="ti crit"><div class="cb"></div><div><div class="tn">Cycle-time validation</div><div class="tm">Single gripper for both sheet types &middot; throughput risk</div></div><div class="te crit">OPEN</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">T&Uuml;V inspection &amp; safety review</div><div class="tm">$5K budget allocated &middot; scheduled pre-shipping</div></div><div class="te">1 WK</div></div>
-      <div class="ti"><div class="cb"></div><div><div class="tn">Full system integration test</div><div class="tm">End-to-end run-up at Launchpad before LM ship</div></div><div class="te">1 WK</div></div>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 
   <div class="footer">
@@ -553,6 +548,5 @@ background:var(–bg2);
   }
   tick(); setInterval(tick,1000);
 </script>
-
 </body>
 </html>
