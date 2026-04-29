@@ -166,23 +166,22 @@
     letter-spacing:0; font-weight:500; margin-top:2px;
   }
 
-  /* HERO — guaranteed visible area whether image loads or not */
+  /* HERO — fixed proportional height so the rest of the column fits */
   .hero{
-    flex:1 1 auto;
+    flex: 0 0 38%;
     background:var(--bg3);
     position:relative;
     overflow:hidden;
-    min-height:280px;
     display:flex;
     align-items:center;
     justify-content:center;
     border-bottom:1px solid var(--line);
   }
   .hero img{
-    max-width:78%;
+    max-width:60%;
     max-height:88%;
     object-fit:contain;
-    filter:drop-shadow(0 24px 48px rgba(0,0,0,.7));
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
   }
   /* Visible fallback if image fails to load */
   .hero img:not([src]),
@@ -242,41 +241,41 @@
   }
 
   .desc{
-    padding:22px 40px 18px;
+    padding:18px 40px 16px;
     background:var(--bg2);
     border-bottom:1px solid var(--line);
     flex-shrink:0;
   }
   .desc h4{
-    font-size:12px; color:var(--dim);
-    letter-spacing:.28em; margin-bottom:12px;
+    font-size:11px; color:var(--dim);
+    letter-spacing:.28em; margin-bottom:10px;
     display:flex; align-items:center; gap:10px;
   }
   .desc h4::after{content:''; flex:1; height:1px; background:var(--line)}
-  .desc p{font-size:15px; line-height:1.6; margin-bottom:8px}
+  .desc p{font-size:14px; line-height:1.55; margin-bottom:6px}
   .desc p+p{color:var(--dim); margin-bottom:0}
   .specs{
-    display:flex; gap:32px;
-    margin-top:14px; padding-top:12px;
+    display:flex; gap:28px;
+    margin-top:12px; padding-top:10px;
     border-top:1px solid var(--line);
-    font-size:12px; letter-spacing:.18em; color:var(--dim);
+    font-size:11px; letter-spacing:.18em; color:var(--dim);
   }
   .specs b{
     color:var(--text); font-family:var(--mono);
     font-weight:500; margin-left:8px;
-    letter-spacing:0; font-size:14px;
+    letter-spacing:0; font-size:13px;
   }
 
-  .bars{padding:24px 40px 28px; background:var(--bg2); flex-shrink:0}
+  .bars{padding:20px 40px 22px; background:var(--bg2); flex-shrink:0}
   .bars h4{
     font-size:13px; color:var(--text);
     letter-spacing:.3em; font-weight:500;
-    margin-bottom:18px;
+    margin-bottom:14px;
     display:flex; align-items:center; gap:12px;
   }
   .bars h4::before{content:''; width:4px; height:18px; background:var(--lp)}
   .bars h4::after{content:''; flex:1; height:1px; background:var(--line)}
-  .bg{display:grid; grid-template-columns:repeat(2,1fr); gap:16px 36px}
+  .bg{display:grid; grid-template-columns:repeat(2,1fr); gap:12px 36px}
   .bi{display:flex; flex-direction:column; gap:8px}
   .bh{
     display:flex; justify-content:space-between;
@@ -446,10 +445,6 @@
       </div>
 
       <div class="hero">
-        <div class="hero-fallback">
-          <div class="box">IMAGE NOT LOADED</div>
-          <div>image.jpg expected at site root</div>
-        </div>
         <img src="image.jpg" alt="CF Handling System">
         <span class="corner-br"></span>
         <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
