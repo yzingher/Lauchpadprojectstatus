@@ -10,7 +10,7 @@
     --line:#1f1f26; --line2:#2a2a33;
     --text:#e8e8ec; --dim:#9a9aa5; --faint:#5a5a64;
     --amber:#ffb000; --green:#00d97e; --red:#ff3b3b;
-    --cyan:#4ea1ff;
+    --blue:#4ea1ff;
     --lp:#e6113b;
     --mono:'JetBrains Mono',monospace;
     --display:'Space Grotesk',sans-serif;
@@ -25,7 +25,7 @@
     content:''; position:fixed; inset:0;
     background:
       radial-gradient(ellipse at 0% 0%, rgba(78,161,255,.06), transparent 50%),
-      radial-gradient(ellipse at 100% 100%, rgba(78,161,255,.04), transparent 50%);
+      radial-gradient(ellipse at 100% 100%, rgba(78,161,255,.03), transparent 50%);
     pointer-events:none; z-index:0;
   }
   body::after{
@@ -41,7 +41,7 @@
     position:relative; z-index:1;
     height:100vh; width:100vw;
     display:grid;
-    grid-template-rows: 76px 84px 100px 1fr 44px;
+    grid-template-rows: 76px 92px 100px 1fr 36px;
     overflow:hidden;
   }
 
@@ -70,10 +70,10 @@
   .brand-text .build{color:var(--lp)}
   .brand-text .ai{
     font-size:11px;
-    letter-spacing:.18em;
-    color:var(--cyan);
+    letter-spacing:.15em;
+    color:var(--dim);
     margin-top:1px;
-    font-weight:600;
+    font-weight:500;
   }
   .brand-divider{width:1px; height:36px; background:var(--line2)}
   .brand-sub{
@@ -104,196 +104,213 @@
   }
   .clock b{color:var(--text); font-weight:500; font-size:18px}
 
-  /* MILESTONES TIMELINE */
-  .mile{
-    display:flex;
-    align-items:center;
-    padding:0 60px;
+  /* MILESTONE TIMELINE */
+  .milestones{
+    padding:18px 60px 14px;
     border-bottom:1px solid var(--line);
     background:var(--bg2);
     position:relative;
   }
-  .mile-track{
+  .ms-track{
     position:relative;
-    flex:1;
-    height:2px;
-    background:var(--line2);
+    height:50px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
   }
-  .mile-fill{
+  .ms-line{
     position:absolute;
-    left:0; top:0; bottom:0;
-    background:var(--cyan);
-    box-shadow:0 0 10px rgba(78,161,255,.5);
-    width:35%;
+    top:50%;
+    left:0; right:0;
+    height:2px;
+    background:var(--line2);
+    transform:translateY(-50%);
   }
-  .mile-stop{
-    position:relative;
-    z-index:2;
+  .ms-fill{
+    position:absolute;
+    top:50%;
+    left:0;
+    height:2px;
+    background:var(--blue);
+    transform:translateY(-50%);
+    box-shadow:0 0 12px rgba(78,161,255,.5);
+  }
+  .ms-pt{
+    position:absolute;
+    top:50%;
+    transform:translate(-50%, -50%);
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:8px;
+    gap:6px;
   }
-  .mile-dot{
+  .ms-dot{
     width:14px; height:14px;
     border-radius:50%;
-    background:var(--bg);
+    background:var(--bg3);
     border:2px solid var(--line2);
-    transition:all .3s;
   }
-  .mile-stop.done .mile-dot{
+  .ms-pt.done .ms-dot{
     background:var(--green);
     border-color:var(--green);
-    box-shadow:0 0 12px rgba(0,217,126,.6);
+    box-shadow:0 0 14px rgba(0,217,126,.6);
   }
-  .mile-stop.active .mile-dot{
-    background:var(--cyan);
-    border-color:var(--cyan);
-    box-shadow:0 0 14px rgba(78,161,255,.7);
+  .ms-pt.current .ms-dot{
+    background:var(--blue);
+    border-color:var(--blue);
+    box-shadow:0 0 14px rgba(78,161,255,.6);
     width:18px; height:18px;
   }
-  .mile-stop .mile-lbl{
+  .ms-label{
     position:absolute;
-    top:24px;
+    bottom:calc(50% + 14px);
+    left:50%;
+    transform:translateX(-50%);
+    font-size:11px;
+    letter-spacing:.22em;
+    color:var(--dim);
     white-space:nowrap;
-    text-align:center;
+  }
+  .ms-label .date{
+    display:block;
+    font-family:var(--mono);
+    color:var(--text);
+    font-weight:500;
+    font-size:12px;
+    letter-spacing:.05em;
+    margin-bottom:4px;
+  }
+  .ms-pt.done .ms-label{color:var(--text)}
+  .ms-pt.current .ms-label{color:var(--blue); font-weight:500}
+  .ms-name{
+    position:absolute;
+    top:calc(50% + 16px);
+    left:50%;
+    transform:translateX(-50%);
     font-family:var(--display);
     font-size:13px;
     font-weight:600;
     letter-spacing:.18em;
-    color:var(--text);
-  }
-  .mile-stop.done .mile-lbl{color:var(--dim)}
-  .mile-stop .mile-date{
-    position:absolute;
-    top:-26px;
-    white-space:nowrap;
-    text-align:center;
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:.18em;
     color:var(--dim);
+    white-space:nowrap;
   }
-  .mile-stop.active .mile-date{color:var(--cyan)}
-  .mile-stop.target .mile-date{color:var(--amber)}
-  .mile-stop.target .mile-lbl{color:var(--amber)}
+  .ms-pt.done .ms-name{color:var(--text)}
+  .ms-pt.current .ms-name{color:var(--blue)}
 
-  /* KPI BAR (4 cells now) */
+  /* KPI BAR */
   .kpi-bar{
     display:grid;
-    grid-template-columns:1.6fr 1fr 1.3fr 1.1fr;
+    grid-template-columns: 1.4fr 1fr 1.4fr 1fr;
     border-bottom:1px solid var(--line);
     background:var(--bg2);
   }
   .kpi{
-    padding:16px 24px;
+    padding:14px 24px;
     border-right:1px solid var(--line);
     display:flex; flex-direction:column;
     justify-content:center;
-    gap:8px;
+    gap:6px;
     position:relative;
     overflow:hidden;
   }
   .kpi:last-child{border-right:none}
   .kpi .lbl{font-size:11px; color:var(--dim); letter-spacing:.22em}
-  .kpi .val{
-    font-family:var(--display);
-    font-size:30px; font-weight:700; line-height:1;
-    display:flex; align-items:baseline; gap:8px;
-  }
-  .kpi .val .unit{font-family:var(--mono); font-size:13px; color:var(--dim); font-weight:400}
-  .kpi .delta{font-size:11px; letter-spacing:.12em; color:var(--dim)}
-  .kpi .delta.up{color:var(--green)}
-  .kpi .delta.down{color:var(--amber)}
 
-  /* TIMELINE KPI — combined progress + elapsed */
-  .kpi-timeline{
-    padding:14px 28px;
+  /* timeline KPI (combined progress + elapsed) */
+  .timeline-kpi{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    justify-content:center;
   }
-  .kpi-timeline .top-row{
+  .timeline-top{
     display:flex;
     justify-content:space-between;
     align-items:baseline;
-    margin-bottom:10px;
   }
-  .kpi-timeline .pct{
+  .timeline-pct{
     font-family:var(--display);
     font-size:30px;
     font-weight:700;
     line-height:1;
   }
-  .kpi-timeline .pct .small{font-size:14px; color:var(--dim); margin-left:4px; font-family:var(--mono); font-weight:400}
-  .kpi-timeline .weeks{
+  .timeline-pct .unit{
     font-family:var(--mono);
     font-size:12px;
     color:var(--dim);
-    letter-spacing:.1em;
+    font-weight:400;
+    margin-left:4px;
   }
-  .kpi-timeline .weeks b{color:var(--text); font-weight:500}
-  .kpi-timeline .bar{
-    height:8px;
+  .timeline-weeks{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--dim);
+    letter-spacing:.05em;
+  }
+  .timeline-weeks b{color:var(--text); font-weight:500}
+  .timeline-bar{
+    height:6px;
     background:var(--bg3);
     border:1px solid var(--line);
     position:relative;
     overflow:hidden;
   }
-  .kpi-timeline .bar-fill{
+  .timeline-bar-fill{
     position:absolute;
     top:0; left:0; bottom:0;
-    background:var(--cyan);
-    box-shadow:0 0 12px rgba(78,161,255,.45);
+    background:var(--blue);
+    box-shadow:0 0 12px rgba(78,161,255,.4);
   }
 
-  /* TEAM KPI with avatar */
-  .kpi-team{
+  /* numeric KPI */
+  .kpi .val{
+    font-family:var(--display);
+    font-size:28px; font-weight:700; line-height:1;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .kpi .val .unit{
+    font-family:var(--mono);
+    font-size:13px; color:var(--dim);
+    font-weight:400;
+  }
+  .kpi .delta{font-size:11px; letter-spacing:.12em; color:var(--dim)}
+  .kpi .delta.warn{color:var(--amber)}
+
+  /* lead KPI */
+  .kpi-lead{
     flex-direction:row !important;
     align-items:center !important;
     gap:14px !important;
   }
-  .avatar{
-    width:50px; height:50px;
+  .lead-avatar{
+    width:44px; height:44px;
     border-radius:50%;
     background:var(--bg3);
     border:1.5px solid var(--line2);
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
-    flex-shrink:0;
     font-family:var(--display);
-    font-size:16px;
     font-weight:700;
-    color:var(--cyan);
+    font-size:14px;
     letter-spacing:.05em;
+    color:var(--text);
+    flex-shrink:0;
   }
-  .avatar img{
-    width:100%; height:100%;
-    object-fit:cover;
-  }
-  .kpi-team-text{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-    min-width:0;
-  }
-  .kpi-team-text .lbl{font-size:11px; color:var(--dim); letter-spacing:.22em}
-  .kpi-team-text .name{
+  .lead-info{display:flex; flex-direction:column; gap:3px}
+  .lead-info .lbl{font-size:10px}
+  .lead-name{
     font-family:var(--display);
     font-size:18px;
     font-weight:600;
     line-height:1.1;
-    color:var(--text);
   }
-  .kpi-team-text .role{
+  .lead-role{
     font-size:11px;
     color:var(--dim);
-    letter-spacing:.1em;
-    margin-top:2px;
+    letter-spacing:.05em;
   }
 
+  /* MAIN */
   .main{
     display:grid;
     grid-template-columns:1.55fr 1fr;
@@ -301,86 +318,109 @@
     min-height:0;
   }
 
+  /* LEFT COLUMN */
   .left{
-    display:flex; flex-direction:column;
+    display:flex;
+    flex-direction:column;
     border-right:1px solid var(--line);
-    overflow:hidden; min-height:0;
-  }
-  .ph{
-    padding:22px 40px 20px;
-    border-bottom:1px solid var(--line);
-    background:var(--bg2);
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:28px;
-    align-items:end;
-    flex-shrink:0;
-  }
-  .ph .meta{
-    font-size:13px; color:var(--dim);
-    letter-spacing:.28em; margin-bottom:10px;
-  }
-  .ph .meta b{color:var(--cyan); font-weight:500}
-  .ph h1{
-    font-family:var(--display);
-    font-size:30px; font-weight:700;
-    letter-spacing:-.02em; line-height:1.1;
-  }
-  .ph h1 .a{color:var(--cyan)}
-  .ph .dates{
-    text-align:right;
-    font-size:12px; color:var(--dim);
-    letter-spacing:.22em; line-height:1.9;
-  }
-  .ph .dates b{
-    display:block; color:var(--text);
-    font-family:var(--mono); font-size:16px;
-    letter-spacing:0; font-weight:500; margin-top:2px;
+    overflow:hidden;
+    min-height:0;
   }
 
+  /* customer band */
+  .customer-band{
+    padding:14px 36px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-shrink:0;
+  }
+  .customer-info{display:flex; align-items:baseline; gap:18px}
+  .customer-info .label{
+    font-size:11px;
+    color:var(--dim);
+    letter-spacing:.28em;
+  }
+  .customer-info h1{
+    font-family:var(--display);
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:-.01em;
+    line-height:1.1;
+  }
+  .customer-info h1 .a{color:var(--dim); font-weight:400; margin:0 8px}
+  .customer-id{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    padding:4px 10px;
+    letter-spacing:.15em;
+    flex-shrink:0;
+  }
+
+  /* split bottom: image left, description+status right */
+  .left-bottom{
+    flex:1 1 auto;
+    display:grid;
+    grid-template-columns: 1.25fr 1fr;
+    overflow:hidden;
+    min-height:0;
+  }
+
+  /* hero */
   .hero{
-    flex: 0 0 38%;
     background:var(--bg3);
     position:relative;
     overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-bottom:1px solid var(--line);
+    border-right:1px solid var(--line);
   }
   .hero img,
   .hero video{
-    max-width:60%;
-    max-height:88%;
+    max-width:88%;
+    max-height:90%;
     object-fit:contain;
     filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
   }
   .hero::before{
     content:''; position:absolute;
     top:18px; left:18px; width:22px; height:22px;
-    border-top:2px solid var(--cyan);
-    border-left:2px solid var(--cyan);
+    border-top:2px solid var(--blue);
+    border-left:2px solid var(--blue);
     z-index:2;
   }
   .corner-br{
     position:absolute;
     bottom:18px; right:18px; width:22px; height:22px;
-    border-bottom:2px solid var(--cyan);
-    border-right:2px solid var(--cyan);
+    border-bottom:2px solid var(--blue);
+    border-right:2px solid var(--blue);
     z-index:2;
   }
   .htag{
     position:absolute; bottom:20px; left:20px;
-    font-size:11px; color:var(--dim);
+    font-size:10px; color:var(--dim);
     letter-spacing:.28em;
     background:rgba(10,10,11,.75);
-    padding:6px 14px;
-    border-left:2px solid var(--cyan);
+    padding:6px 12px;
+    border-left:2px solid var(--blue);
     z-index:2;
   }
 
+  /* description + status (right side of left-bottom) */
+  .info-stack{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    min-height:0;
+  }
   .desc{
-    padding:18px 40px 16px;
+    padding:18px 28px 16px;
     background:var(--bg2);
     border-bottom:1px solid var(--line);
     flex-shrink:0;
@@ -391,64 +431,98 @@
     display:flex; align-items:center; gap:10px;
   }
   .desc h4::after{content:''; flex:1; height:1px; background:var(--line)}
-  .desc p{font-size:14px; line-height:1.55; margin-bottom:6px}
+  .desc p{font-size:13px; line-height:1.55; margin-bottom:6px}
   .desc p+p{color:var(--dim); margin-bottom:0}
   .specs{
-    display:flex; gap:28px;
-    margin-top:12px; padding-top:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 20px;
+    margin-top:12px;
+    padding-top:10px;
     border-top:1px solid var(--line);
-    font-size:11px; letter-spacing:.18em; color:var(--dim);
+    font-size:10px;
+    letter-spacing:.18em;
+    color:var(--dim);
   }
+  .specs > div{display:flex; justify-content:space-between; align-items:baseline}
   .specs b{
-    color:var(--text); font-family:var(--mono);
-    font-weight:500; margin-left:8px;
-    letter-spacing:0; font-size:13px;
+    color:var(--text);
+    font-family:var(--mono);
+    font-weight:500;
+    letter-spacing:0;
+    font-size:12px;
   }
 
-  .bars{padding:20px 40px 22px; background:var(--bg2); flex-shrink:0}
+  .bars{
+    padding:18px 28px 22px;
+    background:var(--bg2);
+    flex:1 1 auto;
+    overflow:hidden;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+  }
   .bars h4{
     font-size:13px; color:var(--text);
     letter-spacing:.3em; font-weight:500;
     margin-bottom:14px;
     display:flex; align-items:center; gap:12px;
+    flex-shrink:0;
   }
-  .bars h4::before{content:''; width:4px; height:18px; background:var(--cyan)}
+  .bars h4::before{content:''; width:4px; height:18px; background:var(--blue)}
   .bars h4::after{content:''; flex:1; height:1px; background:var(--line)}
-  .bg{display:grid; grid-template-columns:repeat(2,1fr); gap:12px 36px}
-  .bi{display:flex; flex-direction:column; gap:8px}
+  .bg{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+    overflow:hidden;
+  }
+  .bi{display:flex; flex-direction:column; gap:5px}
   .bh{
     display:flex; justify-content:space-between;
-    align-items:baseline; font-size:14px;
+    align-items:baseline; font-size:13px;
   }
   .bh .l{color:var(--text); font-weight:500}
-  .bh .p{font-family:var(--mono); color:var(--dim); font-size:14px}
-  .bh .p b{color:var(--text); font-weight:500; font-size:16px}
+  .bh .p{font-family:var(--mono); color:var(--dim); font-size:12px}
+  .bh .p b{color:var(--text); font-weight:500; font-size:13px}
   .bt{
-    height:10px; background:var(--bg3);
+    height:8px;
+    background:var(--bg3);
     border:1px solid var(--line);
-    position:relative; overflow:hidden;
+    position:relative;
+    overflow:hidden;
   }
   .bf{
     position:absolute; top:0; left:0; bottom:0;
-    background:var(--cyan);
-    box-shadow:0 0 14px rgba(78,161,255,.45);
+    background:var(--blue);
+    box-shadow:0 0 12px rgba(78,161,255,.4);
   }
-  .bf.green{background:var(--green); box-shadow:0 0 14px rgba(0,217,126,.45)}
-  .bf.amber{background:var(--amber); box-shadow:0 0 14px rgba(255,176,0,.45)}
-  .bf.red{background:var(--red); box-shadow:0 0 14px rgba(255,59,59,.45)}
+  .bf.green{background:var(--green); box-shadow:0 0 12px rgba(0,217,126,.4)}
+  .bf.amber{background:var(--amber); box-shadow:0 0 12px rgba(255,176,0,.4)}
+  .bf.red{background:var(--red); box-shadow:0 0 12px rgba(255,59,59,.4)}
 
+  /* RIGHT COLUMN */
   .right{
     background:var(--bg2);
     display:flex; flex-direction:column;
     overflow:hidden; min-height:0;
   }
   .rh{
-    padding:22px 36px 18px;
+    padding:22px 32px 18px;
     border-bottom:1px solid var(--line);
     flex-shrink:0;
   }
-  .rh .k{font-size:13px; color:var(--cyan); letter-spacing:.32em; margin-bottom:8px}
-  .rh h2{font-family:var(--display); font-size:28px; font-weight:700; line-height:1.1}
+  .rh .k{
+    font-size:12px;
+    color:var(--blue);
+    letter-spacing:.32em;
+    margin-bottom:8px;
+  }
+  .rh h2{
+    font-family:var(--display);
+    font-size:26px; font-weight:700;
+    line-height:1.1;
+  }
   .rh .s{font-size:13px; color:var(--dim); margin-top:6px}
 
   .ts{
@@ -456,30 +530,30 @@
     border-bottom:1px solid var(--line);
     flex-shrink:0;
   }
-  .tc{padding:16px 16px; border-right:1px solid var(--line); text-align:center}
+  .tc{padding:16px 14px; border-right:1px solid var(--line); text-align:center}
   .tc:last-child{border-right:none}
-  .tc .n{font-family:var(--display); font-size:32px; font-weight:700; line-height:1}
+  .tc .n{font-family:var(--display); font-size:28px; font-weight:700; line-height:1}
   .tc .n.amber{color:var(--amber)}
   .tc .n.red{color:var(--red)}
   .tc .n.green{color:var(--green)}
-  .tc .l{font-size:11px; color:var(--dim); letter-spacing:.25em; margin-top:8px}
+  .tc .l{font-size:10px; color:var(--dim); letter-spacing:.25em; margin-top:7px}
 
   .tl-wrap{
     flex:1 1 auto;
     overflow:hidden;
     min-height:0;
     position:relative;
-    padding:18px 28px;
+    padding:16px 24px;
   }
   .tl-wrap::before, .tl-wrap::after{
     content:''; position:absolute;
-    left:0; right:0; height:50px;
+    left:0; right:0; height:40px;
     pointer-events:none; z-index:2;
   }
   .tl-wrap::before{top:0; background:linear-gradient(to bottom, var(--bg2), transparent)}
   .tl-wrap::after{bottom:0; background:linear-gradient(to top, var(--bg2), transparent)}
   .tl{
-    display:flex; flex-direction:column; gap:12px;
+    display:flex; flex-direction:column; gap:10px;
     animation: scroll 60s linear infinite;
   }
   @keyframes scroll {
@@ -491,10 +565,10 @@
   .ti{
     display:grid;
     grid-template-columns:auto 1fr auto;
-    gap:16px; padding:14px 18px;
+    gap:14px; padding:12px 16px;
     background:var(--bg3);
     border:1px solid var(--line);
-    border-left:4px solid var(--cyan);
+    border-left:4px solid var(--blue);
     align-items:start;
     flex-shrink:0;
   }
@@ -502,7 +576,7 @@
   .ti.crit{border-left-color:var(--red)}
   .ti.done{border-left-color:var(--green); opacity:.55}
   .cb{
-    width:18px; height:18px;
+    width:16px; height:16px;
     border:1.5px solid var(--faint);
     margin-top:3px;
     display:flex; align-items:center; justify-content:center;
@@ -510,18 +584,18 @@
   }
   .ti.done .cb{background:var(--green); border-color:var(--green)}
   .ti.done .cb::after{
-    content:''; width:9px; height:5px;
+    content:''; width:8px; height:4px;
     border-left:2px solid black;
     border-bottom:2px solid black;
     transform:rotate(-45deg) translate(1px,-1px);
   }
-  .tn{font-size:15px; font-weight:500; line-height:1.3}
+  .tn{font-size:14px; font-weight:500; line-height:1.3}
   .ti.done .tn{text-decoration:line-through; color:var(--dim)}
-  .tm{font-size:12px; color:var(--dim); margin-top:4px; line-height:1.5}
+  .tm{font-size:11px; color:var(--dim); margin-top:3px; line-height:1.5}
   .te{
-    font-family:var(--mono); font-size:11px; color:var(--dim);
+    font-family:var(--mono); font-size:10px; color:var(--dim);
     border:1px solid var(--line2);
-    padding:5px 10px; letter-spacing:.12em;
+    padding:4px 9px; letter-spacing:.12em;
     flex-shrink:0; align-self:start;
     margin-top:2px; white-space:nowrap;
   }
@@ -529,25 +603,27 @@
   .te.crit{color:var(--red); border-color:var(--red)}
   .te.done{color:var(--green); border-color:var(--green)}
 
+  /* FOOTER */
   .footer{
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:0 40px;
     color:var(--faint);
-    font-size:11px;
+    font-size:10px;
     letter-spacing:.28em;
     border-top:1px solid var(--line);
     background:var(--bg2);
   }
   .footer .lpm{display:flex; align-items:center; gap:10px}
-  .footer .lpm svg{width:18px; height:18px}
-  .footer span b{color:var(--lp); font-weight:500}
+  .footer .lpm svg{width:14px; height:14px}
+  .footer span b{color:var(--text); font-weight:500}
 </style>
 </head>
 <body>
 <div class="app">
 
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
       <div class="lp-mark">
@@ -562,105 +638,124 @@
   </div>
 
   <!-- MILESTONE TIMELINE -->
-  <div class="mile">
-    <div class="mile-track">
-      <div class="mile-fill"></div>
-      <div class="mile-stop done">
-        <div class="mile-date">15 MAR 26</div>
-        <div class="mile-dot"></div>
-        <div class="mile-lbl">CDR</div>
+  <div class="milestones">
+    <div class="ms-track">
+      <div class="ms-line"></div>
+      <div class="ms-fill" style="width:48%"></div>
+
+      <!-- CDR: done -->
+      <div class="ms-pt done" style="left:0%">
+        <div class="ms-label"><span class="date">15 MAR &rsquo;26</span></div>
+        <div class="ms-dot"></div>
+        <div class="ms-name">CDR</div>
       </div>
-      <div class="mile-stop active">
-        <div class="mile-date">IN PROGRESS</div>
-        <div class="mile-dot"></div>
-        <div class="mile-lbl">MACHINE BUILT</div>
+
+      <!-- Machine Built: current -->
+      <div class="ms-pt current" style="left:48%">
+        <div class="ms-label"><span class="date">IN PROGRESS</span></div>
+        <div class="ms-dot"></div>
+        <div class="ms-name">MACHINE BUILT</div>
       </div>
-      <div class="mile-stop">
-        <div class="mile-date">15 JUN 26</div>
-        <div class="mile-dot"></div>
-        <div class="mile-lbl">FAT</div>
+
+      <!-- FAT: pending -->
+      <div class="ms-pt" style="left:75%">
+        <div class="ms-label"><span class="date">15 JUN &rsquo;26</span></div>
+        <div class="ms-dot"></div>
+        <div class="ms-name">FAT</div>
       </div>
-      <div class="mile-stop target">
-        <div class="mile-date">10 JUL 26</div>
-        <div class="mile-dot"></div>
-        <div class="mile-lbl">SAT &middot; TARGET</div>
+
+      <!-- SAT target: pending -->
+      <div class="ms-pt" style="left:100%">
+        <div class="ms-label"><span class="date">10 JUL &rsquo;26</span></div>
+        <div class="ms-dot"></div>
+        <div class="ms-name">SAT &middot; TARGET</div>
       </div>
     </div>
   </div>
 
   <!-- KPI BAR -->
   <div class="kpi-bar">
-    <div class="kpi kpi-timeline">
-      <div class="top-row">
-        <div class="pct">48<span class="small">% complete</span></div>
-        <div class="weeks"><b>WK 12</b> / 26</div>
+    <div class="kpi timeline-kpi">
+      <div class="lbl">PROGRAM TIMELINE</div>
+      <div class="timeline-top">
+        <div class="timeline-pct">48<span class="unit">% complete</span></div>
+        <div class="timeline-weeks">WK <b>12</b> / 26</div>
       </div>
-      <div class="bar"><div class="bar-fill" style="width:48%"></div></div>
+      <div class="timeline-bar">
+        <div class="timeline-bar-fill" style="width:48%"></div>
+      </div>
     </div>
     <div class="kpi">
       <div class="lbl">OPEN TASKS</div>
       <div class="val">11<span class="unit">/ 14</span></div>
       <div class="delta">3 DONE</div>
     </div>
-    <div class="kpi kpi-team">
-      <div class="avatar"><img src="dev.jpg" alt="DS" onerror="this.style.display='none';this.parentElement.textContent='DS'"></div>
-      <div class="kpi-team-text">
+    <div class="kpi kpi-lead">
+      <div class="lead-avatar">DS</div>
+      <div class="lead-info">
         <div class="lbl">PROJECT LEAD</div>
-        <div class="name">Dev Sharma</div>
-        <div class="role">Lead Engineer</div>
+        <div class="lead-name">Dev Sharma</div>
+        <div class="lead-role">Lead Engineer</div>
       </div>
     </div>
     <div class="kpi">
       <div class="lbl">RISKS OPEN</div>
       <div class="val">2<span class="unit">CRIT</span></div>
-      <div class="delta down">CLEARANCE &middot; CYCLE</div>
+      <div class="delta warn">CLEARANCE &middot; CYCLE</div>
     </div>
   </div>
 
+  <!-- MAIN -->
   <div class="main">
     <div class="left">
-      <div class="ph">
-        <div>
-          <div class="meta">CUSTOMER PROGRAM &middot; <b>LM-CF-001</b></div>
+
+      <!-- Customer band -->
+      <div class="customer-band">
+        <div class="customer-info">
+          <span class="label">CUSTOMER</span>
           <h1>Lockheed Martin <span class="a">/</span> Carbon Fiber Handling System</h1>
         </div>
-        <div class="dates">
-          <div>START<b>FEB &rsquo;26</b></div>
-          <div>TARGET<b>JUL &rsquo;26</b></div>
-        </div>
+        <div class="customer-id">LM-CF-001</div>
       </div>
 
-      <div class="hero">
-        <video src="render.mov" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
-        <span class="corner-br"></span>
-        <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
-      </div>
+      <!-- Split bottom: image left, info stack right -->
+      <div class="left-bottom">
 
-      <div class="desc">
-        <h4>PROJECT DESCRIPTION</h4>
-        <p>Sheet pick-and-place system for carbon-fiber prepreg layup. Custom 4-zone pneumatic gripper picks up-sheets and down-sheets from sliding presentation drawers, rotates each to the correct orientation, and stacks them into a travelling tray on a conveyor &mdash; building a multi-layer recipe automatically.</p>
-        <p>Built on Digitool, with vision-based size confirmation, stepper-controlled rotation, and recipe-driven sequencing. Single gripper handles both sheet types, with sheet sizes from 2&Prime; to 12&Prime;.</p>
-        <div class="specs">
-          <div>SHEET RANGE<b>2&Prime; &mdash; 12&Prime;</b></div>
-          <div>GRIPPER ZONES<b>4 + center</b></div>
-          <div>PLATFORM<b>Digitool</b></div>
-          <div>SYSTEM COST<b>$60,500</b></div>
+        <div class="hero">
+          <video src="render.mov" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+          <span class="corner-br"></span>
+          <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
         </div>
-      </div>
 
-      <div class="bars">
-        <h4>PROGRAM STATUS</h4>
-        <div class="bg">
-          <div class="bi"><div class="bh"><span class="l">Mechanical Design</span><span class="p"><b>92</b>%</span></div><div class="bt"><div class="bf green" style="width:92%"></div></div></div>
-          <div class="bi"><div class="bh"><span class="l">Gripper Build</span><span class="p"><b>65</b>%</span></div><div class="bt"><div class="bf green" style="width:65%"></div></div></div>
-          <div class="bi"><div class="bh"><span class="l">Conveyor &amp; Drawers</span><span class="p"><b>40</b>%</span></div><div class="bt"><div class="bf amber" style="width:40%"></div></div></div>
-          <div class="bi"><div class="bh"><span class="l">Vision System</span><span class="p"><b>15</b>%</span></div><div class="bt"><div class="bf amber" style="width:15%"></div></div></div>
-          <div class="bi"><div class="bh"><span class="l">GUI &amp; Recipe Engine</span><span class="p"><b>10</b>%</span></div><div class="bt"><div class="bf amber" style="width:10%"></div></div></div>
-          <div class="bi"><div class="bh"><span class="l">Integration Test</span><span class="p"><b>0</b>%</span></div><div class="bt"><div class="bf" style="width:0%"></div></div></div>
+        <div class="info-stack">
+          <div class="desc">
+            <h4>PROJECT DESCRIPTION</h4>
+            <p>Sheet pick-and-place system for carbon-fiber prepreg layup. Custom 4-zone pneumatic gripper picks up- and down-sheets from sliding presentation drawers, rotates each to orientation, and stacks them into a travelling tray.</p>
+            <p>Built on Digitool, with vision-based size confirmation, stepper-controlled rotation, and recipe-driven sequencing.</p>
+            <div class="specs">
+              <div><span>SHEET RANGE</span><b>2&Prime; &mdash; 12&Prime;</b></div>
+              <div><span>GRIPPER ZONES</span><b>4 + center</b></div>
+              <div><span>PLATFORM</span><b>Digitool</b></div>
+              <div><span>SYSTEM COST</span><b>$60.5K</b></div>
+            </div>
+          </div>
+
+          <div class="bars">
+            <h4>PROGRAM STATUS</h4>
+            <div class="bg">
+              <div class="bi"><div class="bh"><span class="l">Mechanical Design</span><span class="p"><b>92</b>%</span></div><div class="bt"><div class="bf green" style="width:92%"></div></div></div>
+              <div class="bi"><div class="bh"><span class="l">Gripper Build</span><span class="p"><b>65</b>%</span></div><div class="bt"><div class="bf green" style="width:65%"></div></div></div>
+              <div class="bi"><div class="bh"><span class="l">Conveyor &amp; Drawers</span><span class="p"><b>40</b>%</span></div><div class="bt"><div class="bf amber" style="width:40%"></div></div></div>
+              <div class="bi"><div class="bh"><span class="l">Vision System</span><span class="p"><b>15</b>%</span></div><div class="bt"><div class="bf amber" style="width:15%"></div></div></div>
+              <div class="bi"><div class="bh"><span class="l">GUI &amp; Recipe Engine</span><span class="p"><b>10</b>%</span></div><div class="bt"><div class="bf" style="width:10%"></div></div></div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
 
+    <!-- RIGHT COLUMN -->
     <div class="right">
       <div class="rh">
         <div class="k">PROJECT-SPECIFIC</div>
@@ -708,6 +803,7 @@
     </div>
   </div>
 
+  <!-- FOOTER -->
   <div class="footer">
     <div class="lpm">
       <svg viewBox="0 0 100 100"><path d="M50 8 L92 92 L72 92 L50 48 L28 92 L8 92 Z" fill="#e6113b"/></svg>
