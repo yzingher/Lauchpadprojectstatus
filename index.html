@@ -41,7 +41,7 @@
     position:relative; z-index:1;
     height:100vh; width:100vw;
     display:grid;
-    grid-template-rows: 76px 92px 100px 1fr 36px;
+    grid-template-rows: 64px 80px 86px 1fr 32px;
     overflow:hidden;
   }
 
@@ -106,14 +106,14 @@
 
   /* MILESTONE TIMELINE */
   .milestones{
-    padding:18px 60px 14px;
+    padding:12px 60px 10px;
     border-bottom:1px solid var(--line);
     background:var(--bg2);
     position:relative;
   }
   .ms-track{
     position:relative;
-    height:50px;
+    height:42px;
     display:flex;
     align-items:center;
   }
@@ -204,11 +204,11 @@
     background:var(--bg2);
   }
   .kpi{
-    padding:14px 24px;
+    padding:10px 22px;
     border-right:1px solid var(--line);
     display:flex; flex-direction:column;
     justify-content:center;
-    gap:6px;
+    gap:5px;
     position:relative;
     overflow:hidden;
   }
@@ -336,7 +336,7 @@
 
   /* customer band */
   .customer-band{
-    padding:14px 36px;
+    padding:10px 32px;
     border-bottom:1px solid var(--line);
     background:var(--bg2);
     display:flex;
@@ -344,24 +344,29 @@
     justify-content:space-between;
     gap:24px;
     flex-shrink:0;
+    min-height:54px;
   }
-  .customer-info{display:flex; align-items:baseline; gap:18px}
+  .customer-info{display:flex; align-items:baseline; gap:16px; min-width:0; flex:1}
   .customer-info .label{
-    font-size:11px;
+    font-size:10px;
     color:var(--dim);
     letter-spacing:.28em;
+    flex-shrink:0;
   }
   .customer-info h1{
     font-family:var(--display);
-    font-size:22px;
+    font-size:18px;
     font-weight:600;
     letter-spacing:-.01em;
-    line-height:1.1;
+    line-height:1.2;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
-  .customer-info h1 .a{color:var(--dim); font-weight:400; margin:0 8px}
+  .customer-info h1 .a{color:var(--dim); font-weight:400; margin:0 6px}
   .customer-id{
     font-family:var(--mono);
-    font-size:11px;
+    font-size:10px;
     color:var(--blue);
     border:1px solid var(--blue);
     padding:4px 10px;
@@ -427,41 +432,41 @@
     min-height:0;
   }
   .desc{
-    padding:18px 28px 16px;
+    padding:14px 24px 12px;
     background:var(--bg2);
     border-bottom:1px solid var(--line);
     flex-shrink:0;
   }
   .desc h4{
-    font-size:11px; color:var(--dim);
-    letter-spacing:.28em; margin-bottom:10px;
+    font-size:10px; color:var(--dim);
+    letter-spacing:.28em; margin-bottom:8px;
     display:flex; align-items:center; gap:10px;
   }
   .desc h4::after{content:''; flex:1; height:1px; background:var(--line)}
-  .desc p{font-size:13px; line-height:1.55; margin-bottom:6px}
+  .desc p{font-size:12px; line-height:1.5; margin-bottom:5px}
   .desc p+p{color:var(--dim); margin-bottom:0}
   .specs{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px 20px;
-    margin-top:12px;
-    padding-top:10px;
+    gap:6px 16px;
+    margin-top:10px;
+    padding-top:8px;
     border-top:1px solid var(--line);
-    font-size:10px;
+    font-size:9px;
     letter-spacing:.18em;
     color:var(--dim);
   }
-  .specs > div{display:flex; justify-content:space-between; align-items:baseline}
+  .specs > div{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
   .specs b{
     color:var(--text);
     font-family:var(--mono);
     font-weight:500;
     letter-spacing:0;
-    font-size:12px;
+    font-size:11px;
   }
 
   .bars{
-    padding:18px 28px 22px;
+    padding:14px 24px 18px;
     background:var(--bg2);
     flex:1 1 auto;
     overflow:hidden;
@@ -470,30 +475,30 @@
     flex-direction:column;
   }
   .bars h4{
-    font-size:13px; color:var(--text);
+    font-size:12px; color:var(--text);
     letter-spacing:.3em; font-weight:500;
-    margin-bottom:14px;
-    display:flex; align-items:center; gap:12px;
+    margin-bottom:12px;
+    display:flex; align-items:center; gap:10px;
     flex-shrink:0;
   }
-  .bars h4::before{content:''; width:4px; height:18px; background:var(--blue)}
+  .bars h4::before{content:''; width:3px; height:16px; background:var(--blue)}
   .bars h4::after{content:''; flex:1; height:1px; background:var(--line)}
   .bg{
     display:flex;
     flex-direction:column;
-    gap:11px;
+    gap:9px;
     overflow:hidden;
   }
-  .bi{display:flex; flex-direction:column; gap:5px}
+  .bi{display:flex; flex-direction:column; gap:4px}
   .bh{
     display:flex; justify-content:space-between;
-    align-items:baseline; font-size:13px;
+    align-items:baseline; font-size:12px;
   }
   .bh .l{color:var(--text); font-weight:500}
-  .bh .p{font-family:var(--mono); color:var(--dim); font-size:12px}
-  .bh .p b{color:var(--text); font-weight:500; font-size:13px}
+  .bh .p{font-family:var(--mono); color:var(--dim); font-size:11px}
+  .bh .p b{color:var(--text); font-weight:500; font-size:12px}
   .bt{
-    height:8px;
+    height:7px;
     background:var(--bg3);
     border:1px solid var(--line);
     position:relative;
