@@ -286,6 +286,7 @@
     border-radius:50%;
     background:var(--bg3);
     border:1.5px solid var(--line2);
+    overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -295,6 +296,12 @@
     letter-spacing:.05em;
     color:var(--text);
     flex-shrink:0;
+  }
+  .lead-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
   }
   .lead-info{display:flex; flex-direction:column; gap:3px}
   .lead-info .lbl{font-size:10px}
@@ -691,7 +698,7 @@
       <div class="delta">3 DONE</div>
     </div>
     <div class="kpi kpi-lead">
-      <div class="lead-avatar">DS</div>
+      <div class="lead-avatar"><img src="dev.png" alt="Dev Sharma"></div>
       <div class="lead-info">
         <div class="lbl">PROJECT LEAD</div>
         <div class="lead-name">Dev Sharma</div>
@@ -722,7 +729,7 @@
       <div class="left-bottom">
 
         <div class="hero">
-          <video src="render.mov" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+          <video src="render.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
           <span class="corner-br"></span>
           <div class="htag">CF HANDLING SYSTEM &middot; CoDR RENDER</div>
         </div>
