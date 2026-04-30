@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>LAUNCHPAD // JAMES AVERY</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0a0a0b; --bg2:#111114; --bg3:#16161b;
+    --line:#1f1f26; --line2:#2a2a33;
+    --text:#e8e8ec; --dim:#9a9aa5; --faint:#5a5a64;
+    --amber:#ffb000; --green:#00d97e; --red:#ff3b3b;
+    --blue:#4ea1ff;
+    --lp:#e6113b;
+    --mono:'JetBrains Mono',monospace;
+    --display:'Space Grotesk',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background:var(--bg); color:var(--text);
+    font-family:var(--mono); height:100vh; width:100vw;
+    overflow:hidden; line-height:1.4;
+  }
+  body::before{
+    content:''; position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(78,161,255,.06), transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(78,161,255,.03), transparent 50%);
+    pointer-events:none; z-index:0;
+  }
+  body::after{
+    content:''; position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none; z-index:0;
+  }
+
+  .app{
+    position:relative; z-index:1;
+    height:100vh; width:100vw;
+    display:grid;
+    grid-template-rows: 80px 86px 1fr 32px;
+    overflow:hidden;
+  }
+
+  /* TOP BAR */
+  .topbar{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap:48px;
+    padding:0 40px;
+    border-bottom:1px solid var(--line);
+    background: var(--bg2);
+  }
+  .brand{display:flex; align-items:center; gap:18px}
+  .lp-mark{width:46px; height:46px}
+  .lp-mark svg{width:100%; height:100%}
+  .brand-text{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:.22em;
+    display:flex;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .brand-text .build{color:var(--lp)}
+  .brand-text .ai{
+    font-size:11px;
+    letter-spacing:.15em;
+    color:var(--dim);
+    margin-top:1px;
+    font-weight:500;
+  }
+  .brand-divider{width:1px; height:36px; background:var(--line2)}
+  .brand-sub{
+    font-size:14px; color:var(--dim);
+    letter-spacing:.28em;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--green);
+    border:1px solid var(--green);
+    padding:8px 20px;
+    font-size:14px;
+    letter-spacing:.25em;
+    font-weight:500;
+    font-family:var(--display);
+  }
+  .pill::before{
+    content:''; width:9px; height:9px; border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 14px var(--green);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .clock{
+    font-size:14px; color:var(--dim);
+    letter-spacing:.18em;
+    display:flex; align-items:center; gap:18px;
+  }
+  .clock b{color:var(--text); font-weight:500; font-size:18px}
+
+  /* MILESTONE TIMELINE */
+  .milestones{
+    padding:12px 60px 10px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+    position:relative;
+  }
+  .ms-track{
+    position:relative;
+    height:42px;
+    display:flex;
+    align-items:center;
+  }
+  .ms-line{
+    position:absolute;
+    top:50%;
+    left:0; right:0;
+    height:2px;
+    background:var(--line2);
+    transform:translateY(-50%);
+  }
+  .ms-fill{
+    position:absolute;
+    top:50%;
+    left:0;
+    height:2px;
+    background:var(--blue);
+    transform:translateY(-50%);
+    box-shadow:0 0 12px rgba(78,161,255,.5);
+  }
+  .ms-pt{
+    position:absolute;
+    top:50%;
+    transform:translate(-50%, -50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .ms-dot{
+    width:14px; height:14px;
+    border-radius:50%;
+    background:var(--bg3);
+    border:2px solid var(--line2);
+  }
+  .ms-pt.done .ms-dot{
+    background:var(--green);
+    border-color:var(--green);
+    box-shadow:0 0 14px rgba(0,217,126,.6);
+  }
+  .ms-pt.current .ms-dot{
+    background:var(--blue);
+    border-color:var(--blue);
+    box-shadow:0 0 14px rgba(78,161,255,.6);
+    width:18px; height:18px;
+  }
+  .ms-label{
+    position:absolute;
+    bottom:calc(50% + 14px);
+    left:50%;
+    transform:translateX(-50%);
+    font-size:11px;
+    letter-spacing:.22em;
+    color:var(--dim);
+    white-space:nowrap;
+  }
+  .ms-label .date{
+    display:block;
+    font-family:var(--mono);
+    color:var(--text);
+    font-weight:500;
+    font-size:12px;
+    letter-spacing:.05em;
+    margin-bottom:4px;
+  }
+  .ms-pt.done .ms-label{color:var(--text)}
+  .ms-pt.current .ms-label{color:var(--blue); font-weight:500}
+  .ms-name{
+    position:absolute;
+    top:calc(50% + 16px);
+    left:50%;
+    transform:translateX(-50%);
+    font-family:var(--display);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.18em;
+    color:var(--dim);
+    white-space:nowrap;
+  }
+  .ms-pt.done .ms-name{color:var(--text)}
+  .ms-pt.current .ms-name{color:var(--blue)}
+
+  /* KPI BAR */
+  .kpi-bar{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1.4fr 1fr;
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+  }
+  .kpi{
+    padding:10px 22px;
+    border-right:1px solid var(--line);
+    display:flex; flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kpi:last-child{border-right:none}
+  .kpi .lbl{font-size:11px; color:var(--dim); letter-spacing:.22em}
+
+  /* timeline KPI (combined progress + elapsed) */
+  .timeline-kpi{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    justify-content:center;
+  }
+  .timeline-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .timeline-pct{
+    font-family:var(--display);
+    font-size:30px;
+    font-weight:700;
+    line-height:1;
+  }
+  .timeline-pct .unit{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--dim);
+    font-weight:400;
+    margin-left:4px;
+  }
+  .timeline-weeks{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--dim);
+    letter-spacing:.05em;
+  }
+  .timeline-weeks b{color:var(--text); font-weight:500}
+  .timeline-bar{
+    height:6px;
+    background:var(--bg3);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .timeline-bar-fill{
+    position:absolute;
+    top:0; left:0; bottom:0;
+    background:var(--blue);
+    box-shadow:0 0 12px rgba(78,161,255,.4);
+  }
+
+  /* numeric KPI */
+  .kpi .val{
+    font-family:var(--display);
+    font-size:28px; font-weight:700; line-height:1;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .kpi .val .unit{
+    font-family:var(--mono);
+    font-size:13px; color:var(--dim);
+    font-weight:400;
+  }
+  .kpi .delta{font-size:11px; letter-spacing:.12em; color:var(--dim)}
+  .kpi .delta.warn{color:var(--amber)}
+
+  /* lead KPI */
+  .kpi-lead{
+    flex-direction:row !important;
+    align-items:center !important;
+    gap:14px !important;
+  }
+  .lead-avatar{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--bg3);
+    border:1.5px solid var(--line2);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.05em;
+    color:var(--text);
+    flex-shrink:0;
+  }
+  .lead-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .lead-info{display:flex; flex-direction:column; gap:3px}
+  .lead-info .lbl{font-size:10px}
+  .lead-name{
+    font-family:var(--display);
+    font-size:18px;
+    font-weight:600;
+    line-height:1.1;
+  }
+  .lead-role{
+    font-size:11px;
+    color:var(--dim);
+    letter-spacing:.05em;
+  }
+
+  /* MAIN */
+  .main{
+    display:grid;
+    grid-template-columns:1.55fr 1fr;
+    overflow:hidden;
+    min-height:0;
+  }
+
+  /* LEFT COLUMN */
+  .left{
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid var(--line);
+    overflow:hidden;
+    min-height:0;
+  }
+
+  /* customer band */
+  .customer-band{
+    padding:10px 32px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-shrink:0;
+    min-height:54px;
+  }
+  .customer-info{display:flex; align-items:baseline; gap:16px; min-width:0; flex:1}
+  .customer-info .label{
+    font-size:10px;
+    color:var(--dim);
+    letter-spacing:.28em;
+    flex-shrink:0;
+  }
+  .customer-info h1{
+    font-family:var(--display);
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:-.01em;
+    line-height:1.2;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .customer-info h1 .a{color:var(--dim); font-weight:400; margin:0 6px}
+  .customer-id{
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    padding:4px 10px;
+    letter-spacing:.15em;
+    flex-shrink:0;
+  }
+
+  /* split bottom: image left, description+status right */
+  .left-bottom{
+    flex:1 1 auto;
+    display:grid;
+    grid-template-columns: 1.25fr 1fr;
+    overflow:hidden;
+    min-height:0;
+  }
+
+  /* hero */
+  .hero{
+    background:var(--bg3);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-right:1px solid var(--line);
+  }
+  .hero img,
+  .hero video{
+    max-width:88%;
+    max-height:90%;
+    object-fit:contain;
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
+  }
+  .hero::before{
+    content:''; position:absolute;
+    top:18px; left:18px; width:22px; height:22px;
+    border-top:2px solid var(--blue);
+    border-left:2px solid var(--blue);
+    z-index:2;
+  }
+  .corner-br{
+    position:absolute;
+    bottom:18px; right:18px; width:22px; height:22px;
+    border-bottom:2px solid var(--blue);
+    border-right:2px solid var(--blue);
+    z-index:2;
+  }
+  .htag{
+    position:absolute; bottom:20px; left:20px;
+    font-size:10px; color:var(--dim);
+    letter-spacing:.28em;
+    background:rgba(10,10,11,.75);
+    padding:6px 12px;
+    border-left:2px solid var(--blue);
+    z-index:2;
+  }
+
+  /* description + status (right side of left-bottom) */
+  .info-stack{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    min-height:0;
+  }
+  .desc{
+    padding:14px 24px 12px;
+    background:var(--bg2);
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .desc h4{
+    font-size:10px; color:var(--dim);
+    letter-spacing:.28em; margin-bottom:8px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .desc h4::after{content:''; flex:1; height:1px; background:var(--line)}
+  .desc p{font-size:12px; line-height:1.5; margin-bottom:5px}
+  .desc p+p{color:var(--dim); margin-bottom:0}
+  .specs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 16px;
+    margin-top:10px;
+    padding-top:8px;
+    border-top:1px solid var(--line);
+    font-size:9px;
+    letter-spacing:.18em;
+    color:var(--dim);
+  }
+  .specs > div{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+  .specs b{
+    color:var(--text);
+    font-family:var(--mono);
+    font-weight:500;
+    letter-spacing:0;
+    font-size:11px;
+  }
+
+  .bars{
+    padding:14px 24px 18px;
+    background:var(--bg2);
+    flex:1 1 auto;
+    overflow:hidden;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+  }
+  .bars h4{
+    font-size:12px; color:var(--text);
+    letter-spacing:.3em; font-weight:500;
+    margin-bottom:12px;
+    display:flex; align-items:center; gap:10px;
+    flex-shrink:0;
+  }
+  .bars h4::before{content:''; width:3px; height:16px; background:var(--blue)}
+  .bars h4::after{content:''; flex:1; height:1px; background:var(--line)}
+  .bg{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    overflow:hidden;
+  }
+  .bi{display:flex; flex-direction:column; gap:4px}
+  .bh{
+    display:flex; justify-content:space-between;
+    align-items:baseline; font-size:12px;
+  }
+  .bh .l{color:var(--text); font-weight:500}
+  .bh .p{font-family:var(--mono); color:var(--dim); font-size:11px}
+  .bh .p b{color:var(--text); font-weight:500; font-size:12px}
+  .bt{
+    height:7px;
+    background:var(--bg3);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .bf{
+    position:absolute; top:0; left:0; bottom:0;
+    background:var(--blue);
+    box-shadow:0 0 12px rgba(78,161,255,.4);
+  }
+  .bf.green{background:var(--green); box-shadow:0 0 12px rgba(0,217,126,.4)}
+  .bf.amber{background:var(--amber); box-shadow:0 0 12px rgba(255,176,0,.4)}
+  .bf.red{background:var(--red); box-shadow:0 0 12px rgba(255,59,59,.4)}
+
+  /* RIGHT COLUMN */
+  .right{
+    background:var(--bg2);
+    display:flex; flex-direction:column;
+    overflow:hidden; min-height:0;
+  }
+  .rh{
+    padding:22px 32px 18px;
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .rh .k{
+    font-size:12px;
+    color:var(--blue);
+    letter-spacing:.32em;
+    margin-bottom:8px;
+  }
+  .rh h2{
+    font-family:var(--display);
+    font-size:26px; font-weight:700;
+    line-height:1.1;
+  }
+  .rh .s{font-size:13px; color:var(--dim); margin-top:6px}
+
+  .ts{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-bottom:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .tc{padding:16px 14px; border-right:1px solid var(--line); text-align:center}
+  .tc:last-child{border-right:none}
+  .tc .n{font-family:var(--display); font-size:28px; font-weight:700; line-height:1}
+  .tc .n.amber{color:var(--amber)}
+  .tc .n.red{color:var(--red)}
+  .tc .n.green{color:var(--green)}
+  .tc .l{font-size:10px; color:var(--dim); letter-spacing:.25em; margin-top:7px}
+
+  .tl-wrap{
+    flex:1 1 auto;
+    overflow:hidden;
+    min-height:0;
+    position:relative;
+    padding:16px 24px;
+  }
+  .tl-wrap::before, .tl-wrap::after{
+    content:''; position:absolute;
+    left:0; right:0; height:40px;
+    pointer-events:none; z-index:2;
+  }
+  .tl-wrap::before{top:0; background:linear-gradient(to bottom, var(--bg2), transparent)}
+  .tl-wrap::after{bottom:0; background:linear-gradient(to top, var(--bg2), transparent)}
+  .tl{
+    display:flex; flex-direction:column; gap:10px;
+    animation: scroll 60s linear infinite;
+  }
+  @keyframes scroll {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  .tl-wrap:hover .tl{animation-play-state:paused}
+
+  .ti{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:14px; padding:12px 16px;
+    background:var(--bg3);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    align-items:start;
+    flex-shrink:0;
+  }
+  .ti.warn{border-left-color:var(--amber)}
+  .ti.crit{border-left-color:var(--red)}
+  .ti.done{border-left-color:var(--green); opacity:.55}
+  .cb{
+    width:16px; height:16px;
+    border:1.5px solid var(--faint);
+    margin-top:3px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .ti.done .cb{background:var(--green); border-color:var(--green)}
+  .ti.done .cb::after{
+    content:''; width:8px; height:4px;
+    border-left:2px solid black;
+    border-bottom:2px solid black;
+    transform:rotate(-45deg) translate(1px,-1px);
+  }
+  .tn{font-size:14px; font-weight:500; line-height:1.3}
+  .ti.done .tn{text-decoration:line-through; color:var(--dim)}
+  .tm{font-size:11px; color:var(--dim); margin-top:3px; line-height:1.5}
+  .te{
+    font-family:var(--mono); font-size:10px; color:var(--dim);
+    border:1px solid var(--line2);
+    padding:4px 9px; letter-spacing:.12em;
+    flex-shrink:0; align-self:start;
+    margin-top:2px; white-space:nowrap;
+  }
+  .te.warn{color:var(--amber); border-color:var(--amber)}
+  .te.crit{color:var(--red); border-color:var(--red)}
+  .te.done{color:var(--green); border-color:var(--green)}
+
+  /* FOOTER */
+  .footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    color:var(--faint);
+    font-size:10px;
+    letter-spacing:.28em;
+    border-top:1px solid var(--line);
+    background:var(--bg2);
+  }
+  .footer .lpm{display:flex; align-items:center; gap:10px}
+  .footer .lpm svg{width:14px; height:14px}
+  .footer span b{color:var(--text); font-weight:500}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- TOP BAR -->
+
+<!-- MILESTONE TIMELINE -->
+<div class="milestones">
+<div class="ms-track">
+<div class="ms-line"></div>
+<div class="ms-fill" style="width:35%"></div>
+<!-- DDR: current (today) -->
+<div class="ms-pt current" style="left:0%">
+<div class="ms-label"><span class="date">IN PROGRESS</span></div>
+<div class="ms-dot"></div>
+<div class="ms-name">DDR</div>
+</div>
+<!-- Clear to Build: pending -->
+<div class="ms-pt" style="left:35%">
+<div class="ms-label"><span class="date">14 JAN ’26</span></div>
+<div class="ms-dot"></div>
+<div class="ms-name">CLEAR TO BUILD</div>
+</div>
+<!-- Target Ship: pending -->
+<div class="ms-pt" style="left:75%">
+<div class="ms-label"><span class="date">12 FEB ’26</span></div>
+<div class="ms-dot"></div>
+<div class="ms-name">TARGET SHIP</div>
+</div>
+<!-- Commissioned: pending -->
+<div class="ms-pt" style="left:100%">
+<div class="ms-label"><span class="date">26 FEB ’26</span></div>
+<div class="ms-dot"></div>
+<div class="ms-name">COMMISSIONED</div>
+</div>
+</div>
+</div>
+<!-- KPI BAR -->
+<div class="kpi-bar">
+<div class="kpi timeline-kpi">
+<div class="lbl">PROGRAM TIMELINE</div>
+<div class="timeline-top">
+<div class="timeline-pct">35<span class="unit">% complete</span></div>
+<div class="timeline-weeks">WK <b>7</b> / 21</div>
+</div>
+<div class="timeline-bar">
+<div class="timeline-bar-fill" style="width:35%"></div>
+</div>
+</div>
+<div class="kpi">
+<div class="lbl">OPEN TASKS</div>
+<div class="val">18<span class="unit">/ 26</span></div>
+<div class="delta">8 DONE</div>
+</div>
+<div class="kpi kpi-lead">
+<div class="lead-avatar"><img alt="Dan Domikaitis" src="dev.png"/></div>
+<div class="lead-info">
+<div class="lbl">PROJECT LEAD</div>
+<div class="lead-name">Dan Domikaitis</div>
+<div class="lead-role">Program Lead</div>
+</div>
+</div>
+<div class="kpi">
+<div class="lbl">RISKS OPEN</div>
+<div class="val">2<span class="unit">CRIT</span></div>
+<div class="delta warn">ELEVATOR · PMI</div>
+</div>
+</div>
+<!-- MAIN -->
+<div class="main">
+<div class="left">
+<!-- Customer band -->
+<div class="customer-band">
+<div class="customer-info">
+<span class="label">CUSTOMER</span>
+<h1>James Avery <span class="a">/</span> Charm Pick-Place &amp; Powder Dispense</h1>
+</div>
+<div class="customer-id">JA-32E-001</div>
+</div>
+<!-- Split bottom: image left, info stack right -->
+<div class="left-bottom">
+<div class="hero">
+<video autoplay="" disablepictureinpicture="" loop="" muted="" playsinline="" preload="auto" src="jamesavery.mp4"></video>
+<span class="corner-br"></span>
+<div class="htag">32E CHARM SYSTEM · DDR RENDER</div>
+</div>
+<div class="info-stack">
+<div class="desc">
+<h4>PROJECT DESCRIPTION</h4>
+<p>Autonomous charm finishing line: Texas Feeder loads blank pallets, Digitool-01 dispenses a uniform powder curtain across each tray, and Digitool-02 picks singulated charms from a vibe table and places them onto the powder-coated pallets via gantry, vacuum, and rotary tweezer grippers.</p>
+<p>Vision-driven throughout — Helios2+ ToF for charm detection and CAD-mesh fitment, Basler Ace cameras for pick &amp; place validation. Targets ~3,600 charms per 12-hour shift with operator-loaded bins on a 3m belt conveyor.</p>
+<div class="specs">
+<div><span>THROUGHPUT</span><b>~300 charms/hr</b></div>
+<div><span>FOOTPRINT</span><b>4.1m × 3.3m</b></div>
+<div><span>PLATFORM</span><b>2× Digitool + Texas</b></div>
+<div><span>SHIFT VOLUME</span><b>~3,600 charms</b></div>
+</div>
+</div>
+<div class="bars">
+<h4>PROGRAM STATUS</h4>
+<div class="bg">
+<div class="bi"><div class="bh"><span class="l">Heritage Mech &amp; Chassis</span><span class="p"><b>85</b>%</span></div><div class="bt"><div class="bf green" style="width:85%"></div></div></div>
+<div class="bi"><div class="bh"><span class="l">Powder Dispense (Digitool-01)</span><span class="p"><b>55</b>%</span></div><div class="bt"><div class="bf green" style="width:55%"></div></div></div>
+<div class="bi"><div class="bh"><span class="l">Pick &amp; Place (Digitool-02)</span><span class="p"><b>40</b>%</span></div><div class="bt"><div class="bf amber" style="width:40%"></div></div></div>
+<div class="bi"><div class="bh"><span class="l">Vision &amp; CAD Fitment</span><span class="p"><b>30</b>%</span></div><div class="bt"><div class="bf amber" style="width:30%"></div></div></div>
+<div class="bi"><div class="bh"><span class="l">Software, Planner &amp; GUI</span><span class="p"><b>15</b>%</span></div><div class="bt"><div class="bf" style="width:15%"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN -->
+<div class="right">
+<div class="rh">
+<div class="k">PROJECT-SPECIFIC</div>
+<h2>Left to Do</h2>
+<div class="s">Outstanding work to bring the system to full operating state.</div>
+</div>
+<div class="ts">
+<div class="tc"><div class="n green">8</div><div class="l">DONE</div></div>
+<div class="tc"><div class="n amber">10</div><div class="l">IN FLIGHT</div></div>
+<div class="tc"><div class="n red">8</div><div class="l">NOT STARTED</div></div>
+</div>
+<div class="tl-wrap">
+<div class="tl">
+<div class="ti done"><div class="cb"></div><div><div class="tn">Onsite visit · Comfort, TX</div><div class="tm">Customer site walkthrough and requirements capture</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">SRR &amp; Plan Forward review</div><div class="tm">Internal proposal + external review with James Avery complete</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">Powder dispenser re-evaluation</div><div class="tm">Asyril Vibe Hopper 1L selected · waterfall curtain concept</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">Hopper capacity sizing</div><div class="tm">~70mL/shift validated against 24 plates × 2g</div></div><div class="te done">DONE</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">DDR · Detailed Design Review</div><div class="tm">26 NOV — today · gate to procurement</div></div><div class="te warn">TODAY</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">Gripper re-evaluation &amp; tweezer design</div><div class="tm">Schunk EGS 25/40 selected · tweezer + mounting detail outstanding</div></div><div class="te warn">2 WK</div></div>
+<div class="ti warn"><div class="cb"></div><div><div class="tn">Vision modelling · STP to mesh / ID</div><div class="tm">CAD-mesh fitment pipeline · flagged At Risk in schedule</div></div><div class="te warn">3 WK</div></div>
+<div class="ti warn"><div class="cb"></div><div><div class="tn">Powder curtain validation</div><div class="tm">Vibe hopper testing in progress · design release 05 DEC</div></div><div class="te warn">10 DAYS</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">Procurement (long-lead items)</div><div class="tm">30-day window · most hardware already in-house, buffer exists</div></div><div class="te">30 DAYS</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">SW · planner &amp; behaviour tree</div><div class="tm">Forked from V2 base · charm-specific sequencing</div></div><div class="te">2 WK</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">SW · hopper &amp; powder dispense control</div><div class="tm">Vibe hopper setpoints, conveyance speed, dosing logic</div></div><div class="te">2 WK</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">GUI development · recipe + masking select</div><div class="tm">Operator UI for charm load, masking choice, run start</div></div><div class="te">2 WK</div></div>
+<div class="ti crit"><div class="cb"></div><div><div class="tn">Texas Feeder · row 1 / 12 access</div><div class="tm">Lift kinematics block top &amp; bottom rows · fix in dev with sister customer</div></div><div class="te crit">OPEN</div></div>
+<div class="ti crit"><div class="cb"></div><div><div class="tn">CAD-to-Picking pipeline (PMI)</div><div class="tm">Recommended path requires James Avery to add STP242 semantic PMI</div></div><div class="te crit">OPEN</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">Onsite visit · Comfort, TX</div><div class="tm">Customer site walkthrough and requirements capture</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">SRR &amp; Plan Forward review</div><div class="tm">Internal proposal + external review with James Avery complete</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">Powder dispenser re-evaluation</div><div class="tm">Asyril Vibe Hopper 1L selected · waterfall curtain concept</div></div><div class="te done">DONE</div></div>
+<div class="ti done"><div class="cb"></div><div><div class="tn">Hopper capacity sizing</div><div class="tm">~70mL/shift validated against 24 plates × 2g</div></div><div class="te done">DONE</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">DDR · Detailed Design Review</div><div class="tm">26 NOV — today · gate to procurement</div></div><div class="te warn">TODAY</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">Gripper re-evaluation &amp; tweezer design</div><div class="tm">Schunk EGS 25/40 selected · tweezer + mounting detail outstanding</div></div><div class="te warn">2 WK</div></div>
+<div class="ti warn"><div class="cb"></div><div><div class="tn">Vision modelling · STP to mesh / ID</div><div class="tm">CAD-mesh fitment pipeline · flagged At Risk in schedule</div></div><div class="te warn">3 WK</div></div>
+<div class="ti warn"><div class="cb"></div><div><div class="tn">Powder curtain validation</div><div class="tm">Vibe hopper testing in progress · design release 05 DEC</div></div><div class="te warn">10 DAYS</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">Procurement (long-lead items)</div><div class="tm">30-day window · most hardware already in-house, buffer exists</div></div><div class="te">30 DAYS</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">SW · planner &amp; behaviour tree</div><div class="tm">Forked from V2 base · charm-specific sequencing</div></div><div class="te">2 WK</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">SW · hopper &amp; powder dispense control</div><div class="tm">Vibe hopper setpoints, conveyance speed, dosing logic</div></div><div class="te">2 WK</div></div>
+<div class="ti"><div class="cb"></div><div><div class="tn">GUI development · recipe + masking select</div><div class="tm">Operator UI for charm load, masking choice, run start</div></div><div class="te">2 WK</div></div>
+<div class="ti crit"><div class="cb"></div><div><div class="tn">Texas Feeder · row 1 / 12 access</div><div class="tm">Lift kinematics block top &amp; bottom rows · fix in dev with sister customer</div></div><div class="te crit">OPEN</div></div>
+<div class="ti crit"><div class="cb"></div><div><div class="tn">CAD-to-Picking pipeline (PMI)</div><div class="tm">Recommended path requires James Avery to add STP242 semantic PMI</div></div><div class="te crit">OPEN</div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<div class="footer">
+<div class="lpm">
+<svg viewbox="0 0 100 100"><path d="M50 8 L92 92 L72 92 L50 48 L28 92 L8 92 Z" fill="#e6113b"></path></svg>
+<span>LAUNCHPAD.BUILD © 2026</span>
+</div>
+<span>JA-32E-001 · CONFIDENTIAL · CUSTOMER PROGRAM</span>
+<span>OPS TERMINAL <b>v0.7</b></span>
+</div>
+</div>
+<script>
+  function tick(){
+    const t=new Date();
+    const h=String(t.getHours()).padStart(2,'0');
+    const m=String(t.getMinutes()).padStart(2,'0');
+    const s=String(t.getSeconds()).padStart(2,'0');
+    const e=document.getElementById('clk');
+    if(e) e.textContent=h+':'+m+':'+s;
+  }
+  tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
